@@ -1,0 +1,88 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}
+        
+    {% endblock title %}</title>
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "css/custom-30.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/social-share-kit.css" %}">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    {% block script %}
+        
+    {% endblock script %}
+    
+</head>
+<body>
+ <div class="container-fluid status-bar" ></div>
+    <div class="container-fluid site-header" ></div>
+    <div class="container-fluid page">
+        <div class="row">
+            <div class="col-sm-20  col-md-12 hidden-xs">
+                <div id="MainMenu">
+                  <div class="list-group panel">
+                    {% for category in menuitems %}
+                        <a href="{% url 'job_by_category_view' category_name=category.name %}" class="list-group-item
+                        {% if category.name == open_category %}
+                            open 
+                        {% endif %}
+                        ">{{category.name}} <i class="fa fa-caret-down"></i></a>
+                        {% if category.get_children.all %}
+                        <div class="collapse
+                        {% if category.name ==  category_name or category.name == parent_category %}
+                            in
+                        {% endif %}
+                        ">
+                            {% for child in category.get_children.all %}
+                                <a href="{% url 'job_by_category_view' category_name=child.name %}" class="list-group-item
+                                {% if child.name == open_category %}
+                                    open 
+                                {% endif %}
+                                ">{{child.name}}</a>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                    
+                  </div>
+                </div>
+            </div>
+            <div class="col-xs-60  col-sm-40  col-md-48">
+
+{% block content %}
+    
+{% endblock content %}
+	   </div>
+        </div>
+    </div>  
+    <div class="site-footer container-fluid">
+            <div class="container">
+		<ul>
+			<li><a href="#">صفحه اصلی</a></li>
+			<li><span class="circle">&#9898</span></li>
+			<li><a href="#">تماس با ما</a></li>
+			<li><span class="circle">&#9898</span></li>
+			<li><a href="#">درباره ما</a></li>
+		</ul>
+		<span class="clearfix"></span>
+                <p>استفاده از مطالب سایت در صورت ذکر منبع بلامانع است</p>
+                <div class="ssk-group ssk-sm">
+                    <a href="" class="ssk ssk-facebook"></a>
+                    <a href="" class="ssk ssk-twitter"></a>
+                    <a href="" class="ssk ssk-google-plus"></a>
+                    <a href="" class="ssk ssk-linkedin"></a>
+                    <a href="" class="ssk ssk-instagram"></a>
+                </div>
+            </div>
+        </div>
+        <script src="{% static "js/bootstrap.min.js" %}"></script> 
+        <script src="{% static "js/social-share-kit.js" %}"></script>
+        <script type="text/javascript">
+            SocialShareKit.init();
+        </script> 
+</body>
+</html>
+</body>
+</html>

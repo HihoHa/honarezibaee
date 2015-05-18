@@ -1,0 +1,12 @@
+{% load bootstrap3 %}
+{% load job_extras %}
+{% for job in job_list %}
+    <p>{{job.title}}</p>
+    {{job.address|safe}}
+    <hr/>
+{% endfor %}
+{% bootstrap_pagination job_list url=request.path|add:'?keywords='|add:keywords|space_to_plus  size="small" %}
+<script type="text/javascript">
+keywords=function(){return "{{keywords}}";}
+
+</script>

@@ -1,0 +1,85 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{% block title %}{% endblock %}</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+		<link rel="stylesheet" href="{% static "css/jquery.smartmenus.bootstrap.css" %}">
+		<link rel="stylesheet" href="{% static "css/custom.min.css" %}">
+		<link rel="stylesheet" href="{% static "css/navbar.css" %}">
+		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css">
+	</head>
+	<body>
+		<div class="container-fluid site-header" ><div class="wrapper"></div></div>
+		<div class="container-fluid navigation">
+				<div class="container">
+			<div class="navbar" role="navigation">
+				  <div class="navbar-header">
+				    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				      <span class="sr-only">Toggle navigation</span>
+				      <span class="icon-bar"></span>
+				      <span class="icon-bar"></span>
+				      <span class="icon-bar"></span>
+				    </button>
+				    <a class="navbar-brand" href="#">Project name</a>
+				  </div>
+				  <div class="navbar-collapse collapse">
+					   <ul class="nav navbar-nav">
+      <li class="active"><a href="bootstrap-navbar.html">Default</a></li>
+      <li><a href="bootstrap-navbar-static-top.html">Static top</a></li>
+      <li><a href="bootstrap-navbar-fixed-top.html">Fixed top</a></li>
+      <li><a href="bootstrap-navbar-fixed-bottom.html">Fixed bottom</a></li>
+      <li><a href="#">Dropdown</a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Another action</a></li>
+          <li><a href="#">Something else here</a></li>
+          <li class="divider"></li>
+          <li class="dropdown-header">Nav header</li>
+          <li><a href="#">A sub menu</a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="disabled"><a class="disabled" href="#">Disabled item</a></li>
+              <li><a href="#">One more link</a></li>
+            </ul>
+          </li>
+          <li><a href="#">A separated link</a></li>
+        </ul>
+      </li>
+    </ul>
+
+
+
+				  </div><!--/.nav-collapse -->
+				</div>
+				</div>
+			</div>
+		<div class="container page">
+				<div class="row">
+					<div class="col-md-6 col-md-push-3 col-sm-12 col-xs-12">
+						{% block content %}
+						{% endblock content %}
+					</div>
+					<div class="col-md-3 col-md-pull-6 col-sm-6 col-xs-12">
+						{% include "m_article/sidecolumn.html" with listname="Multimedia" itemlist=multimedia %}
+					</div>
+					<div class="col-md-3 col-sm-6 col-xs-12">
+						{% include "m_article/sidecolumn.html" with listname="Talks" itemlist=talks %}
+					</div>
+				</div>
+		</div><!--end .container -->
+		<div class="site-footer container-fluid">
+			<div class="container">
+				<p>استفاده از مطالب سایت در صورت ذکر منبع بلامانع است</p>
+			</div>
+		</div>
+		<script src="{% static "js/jquery.js" %}"></script>
+		<script src="{% static "js/bootstrap.js" %}"></script>
+		<script src="{% static "js/jquery.smartmenus.js" %}"></script>
+		<script src="{% static "js/jquery.smartmenus.bootstrap.js" %}"></script>
+	</body>
+</html>

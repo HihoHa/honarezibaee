@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{{% block script %}
+<script src="{% static "js/mediaelement-and-player.min.js" %}"></script>
+
+ {% endblock %}
+    {% block css %}
+<link rel="stylesheet" href="{% static "css/mediaelementplayer.css" %}" />
+    {% endblock %}
+{% block content %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{message.tags}} alert-dismissible" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>{{message}}</div>
+  {% endfor %}
+{% endif %}
+
+ <form id="form_" method="post" action="{% url 'article_view' article_title=article.title %}" class="hidden">
+    {% csrf_token %}
+{{vote_form.as_p}}
+<input type="submit" value="submit">
+</form>
+
+<br>
+   <h3>{{ article.title }}</h3>
+   <span class="badge">{{article.likes}}</span>
+   <span id="like_btn" class="glyphicon glyphicon-thumbs-up"></span>
+   <span id="dislike_btn" class="glyphicon glyphicon-thumbs-down"></span>
+   <span class="badge">{{article.dislikes}}</span>
+   
+    <article>
+    {% if article.video %}
+            <div style="width:80%; max-width: 640px; margin: 0 auto;"><video src="{{ article.video.url }}" width="320" height="240" controls="controls" style="width:100%;height:100%;" controls="controls" width="100%" height="100%"></video></div>
+    {% endif %}
+        {{ article.content|safe }}</article>
+ {% if related_articles %}
+     <p>مطالب مرتبط:</p>
+{% for article in related_articles %}
+
+    <p><a href="{% url 'article_view' article_title=article.title %}">{{ article.title }}</a></p>
+{% endfor %}
+
+ {% endif %}
+
+{% endblock content %}
+{% block buttom_script %}
+<script>
+    $(document).ready(function(){$('video, audio').mediaelementplayer();});
+    </script>
+{% endblock %}

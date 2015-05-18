@@ -1,0 +1,19 @@
+<div class="panel pane">
+	<div class="panel-heading pane-heading">
+		<h3 class="panel-title">{{ listname }}</h3>						
+	</div>
+	<div class="panel-body pane-body">
+		<ul class="item-list">
+			{% for item in itemlist %}
+			<li class="item">
+				<a class="pull-right" href="/">
+				<div class="thumbnail"><img src="{{ item.image.url }}"  alt="{{ item.title }}" width="50px" height="50px"></div></a>
+				<div class="item-body">
+					<a href="{% url 'article_view' article_title=item.title %}"><h4 class="item-heading">{{ item.title }}<h4></a>
+					<span class="clearfix"></span>
+				</div>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+</div><!--end .panel -->

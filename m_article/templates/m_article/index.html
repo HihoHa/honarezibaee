@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load article_extras %}
+{% load cropping %}
+{% block content %}
+{% for article in articles %}
+
+
+<div class="article_preview">
+	<div class="preview_wrapper"><img src="{% cropped_thumbnail article "cropping" %}", alt="{{ article.title }}" class='article_image_preview'>
+		<p class="article_title_preview">
+			{{ article.title }}
+		</p>
+		<div class="article_text_preview"><p class='article_text_preview'>{{ article.content|first_paragraph }}</p></div></div>
+</div>
+
+{% endfor %}	
+{% endblock content %}

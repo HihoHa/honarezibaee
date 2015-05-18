@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load article_extras %}
+{% load cropping %}
+{% load bootstrap3 %}
+{% block content %}
+    <ul class="article-list">
+	{% for article in articles %}
+        <li class="article">
+            <a class="pull-right" href="{% url 'article_view' article_title=article.title %}">
+                <div class="thumbnail"><img src="{% cropped_thumbnail article "cropping" %}" width="200px" height="140px"></div></a>
+                <div class="item-body">
+                    <a href="{% url 'article_view' article_title=article.title %}">
+                    <h4 class="article-heading">{{ article.title }} </h4></a>
+                    <span class="clearfix"></span>
+                </div>
+                <p class="description">{{ article.content|first_paragraph}}</p>
+        </li>  
+	{% endfor %}
+    </ul>
+
+{% bootstrap_pagination articles url=request.path  size="small" %}
+{% endblock content %}

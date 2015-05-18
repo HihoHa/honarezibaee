@@ -1,0 +1,42 @@
+{% extends "jobs/base.html" %}
+{% load bootstrap3 %}
+
+{% block script %}
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+<script>
+function initialize() {
+  mapProp = {
+    center:new google.maps.LatLng({{job.lat}},{{job.long}}),
+    zoom:15,
+    mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+  map=new google.maps.Map(document.getElementById("map"), mapProp);
+  marker=new google.maps.Marker({
+  position:mapProp.center,
+  dragable:false,
+  });
+
+  marker.setMap(map);
+  google.maps.event.addListener(marker, 'click', function() {
+  map.panTo(mapProp.center);
+  map.setZoom(mapProp.zoom);
+  });
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+{% endblock script %}
+
+{% block content %}
+    <h1>{{ job.title }}</h1>
+    <div id="map" style="width:500px;height:380px;float:left;"></div>
+    <div>{{ job.description|safe}}</div>
+    <p><strong>Address:</strong><address>{{ job.address|safe}}</address></p>
+    {% if job.email_address %}
+        <p>e-mail:<a href="mailto:{{job.email_address}}">{{job.email_address}}</a></p>
+    {% endif %}
+    {% for tag in job.tags.all %}
+        <span class="badge">{{tag.name}}</span>
+    {% endfor %}
+    
+{% endblock content %}

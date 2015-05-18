@@ -1,0 +1,81 @@
+{% extends "jobs/base.html" %}
+
+    {% block title %}
+        Job Search
+    {% endblock title %}
+    
+{% block script %}
+    <script type="text/javascript">
+        function getQueryVariable(variable, string) {
+            var vars = string.split('&');
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split('=');
+                if (decodeURIComponent(pair[0]) == variable) {
+                    return decodeURIComponent(pair[1]);
+                }
+            }
+            console.log('Query variable %s not found', variable);
+        }
+        function submitForm(){
+            var frm = $('#job-search-form');
+            var kwrds = $("#id_keywords").val();
+            $.ajax({
+                    type: frm.attr('method'),
+                    url: frm.attr('action'),
+                    data:frm.serialize(),
+                    success: function(data){
+                        $('#result').html(data);
+                        // $('#showing-result-for').html(something:D);todo
+                        updatePaginationLinks();
+                        keywords = kwrds;
+                    }
+                });
+        }
+        function updatePaginationLinks(){
+            $(".pagination>li>a").each(function(index){
+                $( this ).click(function(e){
+                    if (! $(e.target).parent().hasClass("disabled")) {
+                    $("#id_page").val(getQueryVariable("page", $(e.target).attr("href")));
+                    $("#id_keywords").val(keywords);
+                    submitForm();
+                    e.preventDefault();
+                    }
+                });
+            });
+
+            
+        }
+        $(document).ready(function(){
+            keywords = "{{keywords}}";
+            $('#job-search-form').submit(function(e){
+                e.preventDefault();
+                $("id-page").val('1');
+                submitForm();
+                
+            });
+            updatePaginationLinks();
+
+        });
+
+    </script>
+{% endblock script %}
+    
+{% block content %}
+    <form id="job-search-form" role="form" action="{% url 'job_main' %}" method="post">
+            {% csrf_token %}
+            {{form}}
+           
+            <input class="btn search-btn" type="submit" value="جستجو"/>
+          
+      </form>
+<div id="showing-result-for">
+نمایش نتایج برای: {{keywords}}
+</div>
+<div id="result">
+{% if job_list %}
+    {% include "jobs/search_results.html" with job_list=job_list %}
+{% endif %}
+</div>
+
+{% endblock content %}
+    

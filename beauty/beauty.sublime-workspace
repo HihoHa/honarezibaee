@@ -1,0 +1,1295 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Mode",
+				"ModelForm	ModelForm"
+			],
+			[
+				"slid",
+				"SlideShowAdmin"
+			],
+			[
+				"Image",
+				"ImageField"
+			],
+			[
+				"update",
+				"update_related_articles"
+			],
+			[
+				"reque",
+				"required"
+			],
+			[
+				"related_",
+				"related_articles"
+			],
+			[
+				"related",
+				"related_articles"
+			],
+			[
+				"map",
+				"mapProp"
+			],
+			[
+				"id_",
+				"id_keywords"
+			],
+			[
+				"get_",
+				"get_form_context"
+			],
+			[
+				"multif",
+				"multifile"
+			],
+			[
+				"ME",
+				"MEDIA_URL"
+			],
+			[
+				"MED",
+				"MEDIA_ROOT"
+			],
+			[
+				"MEDIA",
+				"MEDIA_URL"
+			],
+			[
+				"for",
+				"force_update"
+			],
+			[
+				"force",
+				"force_insert"
+			],
+			[
+				"article",
+				"article_avatar"
+			],
+			[
+				"Ar",
+				"ArticleView"
+			],
+			[
+				"opi",
+				"opinion_is_new"
+			],
+			[
+				"opinion",
+				"opinion_is_new"
+			],
+			[
+				"Article",
+				"ArticleManager"
+			],
+			[
+				"JobSearch",
+				"JobSearchResult"
+			],
+			[
+				"Jobsearch",
+				"JobSearchForm"
+			],
+			[
+				"fore",
+				"foriegn_keys"
+			],
+			[
+				"List",
+				"ListView"
+			],
+			[
+				"json_",
+				"json_fields"
+			],
+			[
+				"json",
+				"json_fields"
+			],
+			[
+				"Articlcatv",
+				"ArticleByCategoryView"
+			],
+			[
+				"li",
+				"listview	ListView"
+			],
+			[
+				"Lis",
+				"ListView"
+			],
+			[
+				"Li",
+				"ListJSONViewMixin"
+			],
+			[
+				"Ls",
+				"ListJSONViewMixin"
+			],
+			[
+				"Mo",
+				"MobileViewRefiner"
+			],
+			[
+				"ser",
+				"serialize"
+			],
+			[
+				"get",
+				"get_queryset"
+			],
+			[
+				"Job",
+				"JobListByTagMixin"
+			],
+			[
+				"uni",
+				"unique"
+			],
+			[
+				"unique_for",
+				"unique_for_month"
+			],
+			[
+				"download",
+				"download_images"
+			],
+			[
+				"Artic",
+				"ArticleAdminForm"
+			],
+			[
+				"link",
+				"link"
+			],
+			[
+				"Medi",
+				"MEDIA_URL"
+			],
+			[
+				"chunk",
+				"chunk_size"
+			],
+			[
+				"__",
+				"__unicode__"
+			],
+			[
+				"For",
+				"ForeignKey"
+			],
+			[
+				"class",
+				"classmethod"
+			],
+			[
+				"ali",
+				"vertical-align"
+			],
+			[
+				"Arti",
+				"ArticleAdmin"
+			],
+			[
+				"dea",
+				"default"
+			],
+			[
+				"conte",
+				"content_wrapper"
+			],
+			[
+				"pad",
+				"padding"
+			],
+			[
+				"in",
+				"inline"
+			],
+			[
+				"STATIC_",
+				"STATICFILES_DIRS"
+			],
+			[
+				"STAT",
+				"STATIC_URL"
+			],
+			[
+				"Statc",
+				"STATICFILES_DIRS"
+			],
+			[
+				"Stat",
+				"STATIC_ROOT"
+			],
+			[
+				"medi",
+				"MEDIA_URL"
+			],
+			[
+				"static_",
+				"STATICFILES_DIRS"
+			],
+			[
+				"template_d",
+				"TEMPLATE_DIRS"
+			],
+			[
+				"TEMPLATE_",
+				"TEMPLATE_DIRS"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/home/ali/Workspace/beauty/beauty/templates/base.html",
+			"settings":
+			{
+				"buffer_size": 7815,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/ali/Workspace/beauty/beauty/m_article/views.py",
+			"settings":
+			{
+				"buffer_size": 7316,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/ali/Workspace/beauty/beauty/m_article/models.py",
+			"settings":
+			{
+				"buffer_size": 5780,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/ali/Workspace/beauty/beauty/m_article/templates/m_article/sidecolumn.html",
+			"settings":
+			{
+				"buffer_size": 567,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "settings.py",
+			"settings":
+			{
+				"buffer_size": 3397,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/ali/Workspace/beauty/beauty/jobs/admin.py",
+			"settings":
+			{
+				"buffer_size": 1161,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/ali/Workspace/beauty/beauty/jobs/templates/jobs/job_detail.html",
+			"settings":
+			{
+				"buffer_size": 1204,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/ali/Workspace/beauty/beauty/m_article/urls.py",
+			"settings":
+			{
+				"buffer_size": 609,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 222.0,
+		"selected_items":
+		[
+		],
+		"width": 575.0
+	},
+	"console":
+	{
+		"height": 110.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/ali/Workspace/beauty/beauty/m_article/models.py",
+		"/home/ali/Workspace/beauty/beauty/m_article/admin.py",
+		"/home/ali/Workspace/beauty/beauty/jobs/admin.py",
+		"/home/ali/Workspace/beauty/beauty/m_article/signals.py",
+		"/home/ali/Workspace/beauty/beauty/m_article/views.py",
+		"/home/ali/Workspace/beauty/beauty/m_article/templates/m_article/sidecolumn.html",
+		"/home/ali/Workspace/beauty/beauty/cookie_user/models.py",
+		"/home/ali/Workspace/beauty/beauty/jobs/models.py",
+		"/home/ali/Workspace/beauty/beauty/m_article/templates/m_article/article.html",
+		"/home/ali/.config/sublime-text-2/Packages/User/Preferences.sublime-settings",
+		"/home/ali/Workspace/beauty/beauty/beauty/settings.py",
+		"/home/ali/Workspace/beauty/beauty/templates/base.html",
+		"/home/ali/Workspace/beauty/beauty/jobs/templates/jobs/base.html",
+		"/home/ali/Workspace/beauty/beauty/jobs/views.py",
+		"/home/ali/Workspace/beauty/beauty/jobs/templates/jobs/job_detail.html",
+		"/home/ali/Workspace/beauty/beauty/jobs/templates/jobs/job_search.html",
+		"/home/ali/Workspace/beauty/beauty/jobs/templates/jobs/search_results.html",
+		"/home/ali/Workspace/beauty/beauty/m_article/templatetags/article_extras.py",
+		"/home/ali/Workspace/beauty/beauty/jobs/templatetags/job_extras.py",
+		"/home/ali/Workspace/beauty/beauty/m_article/templates/m_article/article_list.html",
+		"/home/ali/Workspace/beauty/beauty/jobs/templates/jobs/job_list.html",
+		"/home/ali/Workspace/beauty/beauty/jobs/urls.py",
+		"/home/ali/Workspace/beauty/beauty/templates/menu.html",
+		"/home/ali/Workspace/beauty/beauty/jobs/forms.py",
+		"/home/ali/Workspace/beauty/beauty/templates/job_base.html",
+		"/home/ali/Workspace/beauty/beauty/apis/views.py",
+		"/home/ali/Workspace/beauty/beauty/m_article/forms.py",
+		"/home/ali/Workspace/beauty/beauty/m_article/templates/m_article/article_detail.html",
+		"/home/ali/Workspace/beauty/beauty/m_article/templates/m_article/index.html",
+		"/home/ali/Workspace/beauty/beauty/m_article/urls.py",
+		"/home/ali/Workspace/beauty/beauty/beauty/utils.py",
+		"/home/ali/Workspace/beauty/beauty/apis/urls.py",
+		"/home/ali/Workspace/beauty/beauty/templatetags/tags.py",
+		"/home/ali/Workspace/beauty/beauty/m_article/templates/m_article/menu.html",
+		"/home/ali/Workspace/beauty/beauty/beauty/beauty.sublime-workspace",
+		"/home/ali/Workspace/beauty/beauty/m_article/utils.py",
+		"/home/ali/Workspace/beauty/beauty/m_article/templates/m_article/base_main.html",
+		"/home/ali/Workspace/beauty/beauty/beauty/urls.py",
+		"/home/ali/Workspace/beauty/beauty/m_article/templates/m_article/article_detail",
+		"/home/ali/.config/sublime-text-2/Packages/User/Default (Linux).sublime-keymap",
+		"/home/ali/Workspace/beauty/beauty/templates/article_detail.html",
+		"/home/ali/Workspace/beauty/beauty/beauty/views.py",
+		"/home/ali/Workspace/beauty/beauty/templates/login.html",
+		"/home/ali/Workspace/beauty/beauty/manage.py",
+		"/home/ali/test.py",
+		"/home/ali/toolbox-down.sh",
+		"/usr/local/lib/python2.7/dist-packages/courseradownloader/courseradownloader.py",
+		"/usr/local/bin/coursera-dl",
+		"/home/ali/Workspace/beauty/env/lib/python2.7/site-packages/django_summernote/admin.py",
+		"/home/ali/Workspace/beauty/env/lib/python2.7/site-packages/django_summernote/models.py",
+		"/home/ali/Workspace/beauty/beauty/static/css/master.css",
+		"/home/ali/Workspace/beauty/env/lib/python2.7/site-packages/treebeard/ns_tree.py",
+		"/home/ali/Workspace/django-tree-test/tree_test/tree_test/settings.py",
+		"/home/ali/Workspace/beauty/env/lib/python2.7/site-packages/taggit/models.py",
+		"/home/ali/Workspace/beauty/beauty/m_article/article_extras.py",
+		"/home/ali/Workspace/beauty/beauty/m_article/m_article/index.html",
+		"/home/ali/Workspace/beauty/beauty/m_article/__init__.py",
+		"/home/ali/Workspace/hackernews/hackernews/hackernews/urls.py",
+		"/home/ali/Workspace/hackernews/hackernews/stories/urls.py",
+		"/home/ali/Workspace/html/html/what.html",
+		"/home/ali/Workspace/hackernews/hackernews/hackernews/settings.py",
+		"/home/ali/Workspace/hackernews/hackernews/hackernews/wsgi.py",
+		"/home/ali/Workspace/hackernews/hackernews/stories/admin.py"
+	],
+	"find":
+	{
+		"height": 39.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"0*",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"comment",
+			"	",
+			"\\t",
+			"logger",
+			"\\t",
+			"url",
+			"menu",
+			"logger",
+			"CookieUser",
+			"cookie_user.CookieUser",
+			"logger",
+			";\"}))",
+			"urljoin",
+			"datetime.utcnow()",
+			"logger.info",
+			"logging",
+			"datetiem",
+			"request",
+			"value",
+			"values",
+			"coockie",
+			"ope",
+			"menuitems",
+			"self.request",
+			"article.",
+			"pk",
+			"foriegn",
+			"related_field",
+			"json_related_fields",
+			")\n",
+			"hashlib",
+			"reverse",
+			"template",
+			"container",
+			"thumbnail",
+			"static",
+			"article",
+			"get_tree",
+			"get_root",
+			"MyTag",
+			"Tag",
+			"sm",
+			"content",
+			"\n#",
+			"FIELDNAME",
+			"\n    ",
+			"template_"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"    ",
+			"mCookieUser",
+			"urlparse.urljoin",
+			"timezone.now()",
+			"logger.error",
+			"logger",
+			"datetime",
+			"cookie",
+			"foreign",
+			"many_related_field",
+			"many_to_many_fields",
+			"item",
+			"ArticleTag",
+			"md"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": true,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/home/ali/Workspace/beauty/beauty/templates/base.html",
+					"settings":
+					{
+						"buffer_size": 7815,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro-master/Syntaxes/HTML (Django).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/home/ali/Workspace/beauty/beauty/m_article/views.py",
+					"settings":
+					{
+						"buffer_size": 7316,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1435,
+								1435
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro-master/Syntaxes/Python Django.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 483.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/home/ali/Workspace/beauty/beauty/m_article/models.py",
+					"settings":
+					{
+						"buffer_size": 5780,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5780,
+								5780
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro-master/Syntaxes/Python Django.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/home/ali/Workspace/beauty/beauty/m_article/templates/m_article/sidecolumn.html",
+					"settings":
+					{
+						"buffer_size": 567,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro-master/Syntaxes/HTML (Django).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "settings.py",
+					"settings":
+					{
+						"buffer_size": 3397,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro-master/Syntaxes/Python Django.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2277.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/home/ali/Workspace/beauty/beauty/jobs/admin.py",
+					"settings":
+					{
+						"buffer_size": 1161,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1161,
+								1161
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro-master/Syntaxes/Python Django.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 619.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/home/ali/Workspace/beauty/beauty/jobs/templates/jobs/job_detail.html",
+					"settings":
+					{
+						"buffer_size": 1204,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								824,
+								824
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro-master/Syntaxes/HTML (Django).tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 552.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/home/ali/Workspace/beauty/beauty/m_article/urls.py",
+					"settings":
+					{
+						"buffer_size": 609,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro-master/Syntaxes/Python Django.tmLanguage"
+						},
+						"translation.x": 468.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 38.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"url",
+				"m_article/urls.py"
+			],
+			[
+				"jdeta",
+				"jobs/templates/jobs/job_detail.html"
+			],
+			[
+				"jadmin",
+				"jobs/admin.py"
+			],
+			[
+				"set",
+				"beauty/settings.py"
+			],
+			[
+				"side",
+				"m_article/templates/m_article/sidecolumn.html"
+			],
+			[
+				"mmode",
+				"m_article/models.py"
+			],
+			[
+				"mview",
+				"m_article/views.py"
+			],
+			[
+				"base",
+				"templates/base.html"
+			],
+			[
+				"cmodel",
+				"cookie_user/models.py"
+			],
+			[
+				"jmodel",
+				"jobs/models.py"
+			],
+			[
+				"jadm",
+				"jobs/admin.py"
+			],
+			[
+				"signal",
+				"m_article/signals.py"
+			],
+			[
+				"article",
+				"m_article/templates/m_article/article.html"
+			],
+			[
+				"jbase",
+				"jobs/templates/jobs/base.html"
+			],
+			[
+				"madm",
+				"m_article/admin.py"
+			],
+			[
+				"mmod",
+				"m_article/models.py"
+			],
+			[
+				"jd",
+				"jobs/templates/jobs/job_detail.html"
+			],
+			[
+				"sett",
+				"beauty/settings.py"
+			],
+			[
+				"jde",
+				"jobs/templates/jobs/job_detail.html"
+			],
+			[
+				"settin",
+				"beauty/settings.py"
+			],
+			[
+				"jview",
+				"jobs/views.py"
+			],
+			[
+				"jurl",
+				"jobs/urls.py"
+			],
+			[
+				"jlis",
+				"jobs/templates/jobs/job_list.html"
+			],
+			[
+				"jobl",
+				"jobs/templates/jobs/job_list.html"
+			],
+			[
+				"al",
+				"m_article/templates/m_article/article_list.html"
+			],
+			[
+				"jex",
+				"jobs/templatetags/job_extras.py"
+			],
+			[
+				"templatetag",
+				"m_article/templatetags/article_extras.py"
+			],
+			[
+				"arli",
+				"m_article/templates/m_article/article_list.html"
+			],
+			[
+				"arlis",
+				"m_article/templates/m_article/article_list.html"
+			],
+			[
+				"search",
+				"jobs/templates/jobs/search_results.html"
+			],
+			[
+				"jobsa",
+				"jobs/templates/jobs/job_search.html"
+			],
+			[
+				"menu",
+				"templates/menu.html"
+			],
+			[
+				"joburl",
+				"jobs/urls.py"
+			],
+			[
+				"job/bas",
+				"jobs/templates/jobs/base.html"
+			],
+			[
+				"jiew",
+				"jobs/views.py"
+			],
+			[
+				"jm",
+				"jobs/models.py"
+			],
+			[
+				"jform",
+				"jobs/forms.py"
+			],
+			[
+				"mmodel",
+				"m_article/models.py"
+			],
+			[
+				"jmo",
+				"jobs/models.py"
+			],
+			[
+				"jmod",
+				"jobs/models.py"
+			],
+			[
+				"model",
+				"m_article/models.py"
+			],
+			[
+				"cm",
+				"cookie_user/models.py"
+			],
+			[
+				"cook",
+				"cookie_user/models.py"
+			],
+			[
+				"jmodl",
+				"jobs/models.py"
+			],
+			[
+				"madmin",
+				"m_article/admin.py"
+			],
+			[
+				"mform",
+				"m_article/forms.py"
+			],
+			[
+				"jobsear",
+				"jobs/templates/jobs/job_search.html"
+			],
+			[
+				"jobview",
+				"jobs/views.py"
+			],
+			[
+				"apview",
+				"apis/views.py"
+			],
+			[
+				"jlist",
+				"jobs/templates/jobs/job_list.html"
+			],
+			[
+				"jobde",
+				"jobs/templates/jobs/job_detail.html"
+			],
+			[
+				"jsear",
+				"jobs/templates/jobs/job_search.html"
+			],
+			[
+				"jse",
+				"jobs/templates/jobs/job_search.html"
+			],
+			[
+				"jobsea",
+				"jobs/templates/jobs/job_search.html"
+			],
+			[
+				"jove",
+				"jobs/views.py"
+			],
+			[
+				"madmi",
+				"m_article/admin.py"
+			],
+			[
+				"modl",
+				"m_article/models.py"
+			],
+			[
+				"searchrel",
+				"jobs/templates/jobs/search_results.html"
+			],
+			[
+				"jobse",
+				"jobs/templates/jobs/job_search.html"
+			],
+			[
+				"jobsearch",
+				"jobs/templates/jobs/job_search.html"
+			],
+			[
+				"mmodl",
+				"m_article/models.py"
+			],
+			[
+				"sear.ht",
+				"jobs/templates/jobs/job_search.html"
+			],
+			[
+				"",
+				"jobs/templates/jobs/job_search.html"
+			],
+			[
+				"sear",
+				"jobs/templates/jobs/job_search.html"
+			],
+			[
+				"jvew",
+				"jobs/views.py"
+			],
+			[
+				"jobv",
+				"jobs/views.py"
+			],
+			[
+				"arbase",
+				"m_article/templates/m_article/base_main.html"
+			],
+			[
+				"jos",
+				"jobs/templates/jobs/job_search.html"
+			],
+			[
+				"jv",
+				"jobs/views.py"
+			],
+			[
+				"job_se",
+				"jobs/templates/jobs/job_search.html"
+			],
+			[
+				"jvi",
+				"jobs/views.py"
+			],
+			[
+				"mvi",
+				"m_article/views.py"
+			],
+			[
+				"artcledetail",
+				"m_article/templates/m_article/article_detail.html"
+			],
+			[
+				"jobform",
+				"jobs/forms.py"
+			],
+			[
+				"search_result",
+				"jobs/templates/jobs/search_results.html"
+			],
+			[
+				"searchresul",
+				"jobs/templates/jobs/search_results.html"
+			],
+			[
+				"jobu",
+				"jobs/urls.py"
+			],
+			[
+				"mmol",
+				"m_article/models.py"
+			],
+			[
+				"adm",
+				"m_article/admin.py"
+			],
+			[
+				"mmo",
+				"m_article/models.py"
+			],
+			[
+				"admin",
+				"m_article/admin.py"
+			],
+			[
+				"form",
+				"m_article/forms.py"
+			],
+			[
+				"c",
+				"cookie_user/models.py"
+			],
+			[
+				"murl",
+				"m_article/urls.py"
+			],
+			[
+				"mv",
+				"m_article/views.py"
+			],
+			[
+				"mvie",
+				"m_article/views.py"
+			],
+			[
+				"admi",
+				"m_article/admin.py"
+			],
+			[
+				"ah",
+				"m_article/templates/m_article/article.html"
+			],
+			[
+				"ahml",
+				"m_article/templates/m_article/article.html"
+			],
+			[
+				"cmo",
+				"cookie_user/models.py"
+			],
+			[
+				"art",
+				"m_article/templates/m_article/article.html"
+			],
+			[
+				"co",
+				"cookie_user/models.py"
+			],
+			[
+				"mvew",
+				"m_article/views.py"
+			],
+			[
+				"cookmo",
+				"cookie_user/models.py"
+			],
+			[
+				"mutil",
+				"m_article/utils.py"
+			],
+			[
+				"articlelist",
+				"m_article/templates/m_article/article_list.html"
+			],
+			[
+				"basew",
+				"beauty/beauty.sublime-workspace"
+			],
+			[
+				"bases",
+				"beauty/settings.py"
+			],
+			[
+				"view",
+				"m_article/views.py"
+			],
+			[
+				"si",
+				"m_article/templates/m_article/sidecolumn.html"
+			],
+			[
+				"apiurl",
+				"apis/urls.py"
+			],
+			[
+				"urls",
+				"m_article/urls.py"
+			],
+			[
+				"arlist",
+				"m_article/templates/m_article/article_list.html"
+			],
+			[
+				"util",
+				"beauty/utils.py"
+			],
+			[
+				"vew",
+				"m_article/views.py"
+			],
+			[
+				"ade",
+				"m_article/templates/m_article/article_detail.html"
+			],
+			[
+				"arde",
+				"m_article/templates/m_article/article_detail.html"
+			],
+			[
+				"ardet",
+				"m_article/templates/m_article/article_detail"
+			],
+			[
+				"html",
+				"templates/base.html"
+			],
+			[
+				"inde",
+				"m_article/templates/m_article/index.html"
+			],
+			[
+				"aarticlelist",
+				"m_article/templates/m_article/article_list.html"
+			],
+			[
+				"job",
+				"jobs/templates/jobs/job_detail.html"
+			],
+			[
+				"base.html",
+				"templates/base.html"
+			],
+			[
+				"article.ht",
+				"m_article/templates/m_article/article.html"
+			],
+			[
+				"searc",
+				"jobs/templates/jobs/search_results.html"
+			],
+			[
+				"job_s",
+				"jobs/templates/jobs/job_search.html"
+			],
+			[
+				"job_",
+				"jobs/templates/jobs/job_detail.html"
+			],
+			[
+				"artide",
+				"templates/article_detail.html"
+			],
+			[
+				"se",
+				"beauty/settings.py"
+			],
+			[
+				"mode",
+				"m_article/models.py"
+			],
+			[
+				"artihtml",
+				"m_article/templates/m_article/article.html"
+			],
+			[
+				"log",
+				"templates/login.html"
+			],
+			[
+				"logi",
+				"templates/login.html"
+			],
+			[
+				"bview",
+				"beauty/views.py"
+			],
+			[
+				"login",
+				"templates/login.html"
+			],
+			[
+				"artchtml",
+				"m_article/templates/m_article/article.html"
+			],
+			[
+				"artcl",
+				"m_article/templates/m_article/article_list.html"
+			],
+			[
+				"article.html",
+				"m_article/templates/m_article/article.html"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 224.0,
+	"status_bar_visible": true
+}

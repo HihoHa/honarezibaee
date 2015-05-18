@@ -1,0 +1,85 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{% block title %}{% endblock %}</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<link rel="stylesheet" href="bootstrap.css">
+		<link rel="stylesheet" href="{% static "bootstrap-theme.css" %}">
+		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css">
+	</head>
+	<body>
+		<div class="site-header" ><div class="wrapper"></div></div>
+		<div class="container">
+			<div class="wrapper">
+				<!--------------------- -->
+				<nav rol="navigation" class="navbar navbar-default">
+					<div class="navbar-header">
+						<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a href="#" class="navbar-brand">هنر زیبایی</a>
+					</div><!--end .navbar-header -->
+					<div id="navbarCollapse" class="collapse navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="#">صفحه اصلی</a></li>
+							<li class="dropdown">
+								<a data-toggle="dropdown" class="dropdown-toggle" href="#">آرایش<b class="caret"></b></a><ul rol="menu" class="dropdown-menu"><li><a href="#">مو</a></li><li><a href="#">صورت</a></li>
+						</ul></li>
+							<li><a href="#">تناسب اندام</a></li>
+						</ul>
+					</div><!-- end #navbarCollapse -->
+				</nav>
+				<!----------------- -->
+				<div class="row">
+					<div class="col-md-6 col-md-push-3 col-sm-12 col-xs-12">
+						<div id="slideshow" class="carousel slide" data-interval="5000" data-ride="carousel">
+							<ol class="carousel-indicators">
+								<li data-target="#slideshow" data-slide-to="0" class="cative"></li>
+								<li data-target="#slideshow" data-slide-to="1"></li>
+								<li data-target="#slideshow" data-slide-to="2"></li>
+							</ol>
+							<div class="carousel-inner">
+								<div class="active item">
+									<img src="1.jpg" class="center-block img-responsive">
+									<div class="carousel-caption"><span class="caption center-block bg-success"><h3>مجله ی زیبایی</h3></span></div>
+								</div>
+								<div class="item">
+									<img src="2.jpg" class="center-block img-responsive">
+									<div class="carousel-caption"><span class="caption center-block bg-success"><h3>تناسب اندام</h3></span></div>
+								</div>
+								<div class="item">
+									<img src="3.jpg" class="center-block img-responsive">
+									<div class="carousel-caption"><span class="caption center-block bg-success"><h3>تناسب اندام</h3></span></div>
+								</div>
+							</div>
+							<a class="carousel-control left" href="#slideshow" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span>
+							</a>
+							<a class="carousel-control right" href="#slideshow" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span>
+							</a>
+						</div>
+						{% block content %}
+						{% endblock content %}
+					</div>
+					<div class="col-md-3 col-md-pull-6 col-sm-6 col-xs-12">
+						{% include "m_article/sidecolumn.html" with listname="Multimedia" itemlist=multimedia %}
+					</div>
+					<div class="col-md-3 col-sm-6 col-xs-12">
+						{% include "m_article/sidecolumn.html" with listname="Talks" itemlist=talks %}
+					</div>
+				</div>
+			</div><!-- end .wrapper -->
+		</div><!--end .container -->
+		<div class="site-footer">
+			<div class="wrapper">
+				<p>استفاده از مطالب سایت در صورت ذکر منبع بلامانع است</p>
+			</div>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="bootstrap.js"></script>
+	</body>
+</html>

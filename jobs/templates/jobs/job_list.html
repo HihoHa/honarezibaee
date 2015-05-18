@@ -1,0 +1,16 @@
+{% extends "jobs/base.html" %}
+{% load bootstrap3 %}
+{% block content %}
+<ul class="job_list">
+{% for job in jobs %}
+        <li>
+		<div>
+		<h3><a href="{% url 'job_view' job_name=job.title %}">{{job.title}}</a></h3>
+		<address>{{job.address|safe}}</address>
+		<address>{{job.email_address}}</address>
+		</div>
+        </li>  
+{% endfor %}
+</ul>
+{% bootstrap_pagination jobs url=request.path  size="small" %}
+{% endblock content %}

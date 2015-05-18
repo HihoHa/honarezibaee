@@ -1,0 +1,227 @@
+{% load staticfiles %}
+{% load cropping %}
+<!DOCTYPE html>
+<html>
+	<head>
+
+    {% block css %}
+
+    {% endblock %}
+		<title>{% block title %}{% endblock %}</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <script src="{% static "js/jquery.js" %}"></script>
+		<script src="{% static "js/bootstrap.js" %}"></script>
+		<script src="{% static "js/jquery.smartmenus.js" %}"></script>
+		<script src="{% static "js/jquery.smartmenus.bootstrap.js" %}"></script>
+		<script src="{% static "js/social-share-kit.js" %}"></script>
+		<script type="text/javascript">
+			SocialShareKit.init();
+		</script>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				var menu = $('#navbar');
+				var origOffsetY = menu.offset().top;
+				function scroll() {
+				    if ($(window).scrollTop() >= origOffsetY) {
+					$('#navbar').addClass('navbar-fixed-top');
+				    } else {
+					$('#navbar').removeClass('navbar-fixed-top');
+				    }
+				   }
+				  document.onscroll = scroll;
+				});
+		</script>
+    {% block script %}
+
+    {% endblock %}
+
+		<link rel="stylesheet" href="{% static "css/jquery.smartmenus.bootstrap.css" %}">
+		<link rel="stylesheet" href="{% static "css/custom.min.css" %}">
+		<link rel="stylesheet" href="{% static "css/navbar.css" %}">
+		<link rel="stylesheet" href="{% static "css/social-share-kit.css" %}">
+	</head>
+	<body>
+		<div class="container-fluid status-bar" ></div>
+		<div class="container-fluid site-header" ></div>
+		<div class="container-fluid navigation" id="navbar">
+				<div class="container">
+			<div  class="navbar" role="navigation">
+				  <div class="navbar-header">
+				    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				      <span class="sr-only">Toggle navigation</span>
+				      <span class="icon-bar"></span>
+				      <span class="icon-bar"></span>
+				      <span class="icon-bar"></span>
+				    </button>
+				    <a class="navbar-brand" href="/">Project name</a>
+				  </div>
+				  <div class="navbar-collapse collapse">
+					  <ul id="main-navbar" class="nav navbar-nav">
+					      {% include "menu.html" with menuitems=menuitems view_name=view_name %}
+
+					    </ul>
+				  </div><!--/.nav-collapse -->
+				</div>
+				</div>
+			</div>
+		<div class="content container page" >
+				<div class="row">
+					<div class="col-md-2 col-md-push-10 col-sm-3 col-sm-push-9 hidden-xs">
+						<section>
+							<p class="job-intro">توضیح توضیح توضیح توضیح توضیح توضیح توضیح توضیح توضیح توضیح توضیح</p>
+							<form rol="form" method="get" >
+								<div class="form-group">
+								<input id="search_field" type="text" class="form-control" />
+								<input type="submit" id="search_btn" class="search-btn btn" value="جستجو" />
+							</div>
+							</form>
+						</section>
+						<section>
+							{% include "m_article/rightsidecolumn.html" with listname="Talks" itemlist=talks %}
+						</section>
+					</div>
+					<div class="col-md-10 col-md-pull-2 col-sm-9 col-sm-pull-3 col-xs-12">
+						<div class="row">
+							<div class="col-md-8 col-md-push-4 col-sm-12 col-xs-12">
+								{% block content %}
+								<div id="slideshow" class="carousel slide" data-interval="5000" data-ride="carousel">
+									<ol class="carousel-indicators">{% for slide in slides %}
+										<li data-target="#slideshow" data-slide-to="{{ forloop.counter0 }}" class="{% if not forloop.counter0 %}
+											active
+										{% endif %}"></li>									
+										{% endfor %}</ol>
+									
+									<div class="carousel-inner">
+										{% for slide in slides %}
+											<div class="{% if not  forloop.counter0 %}
+												active
+											{% endif %}  item">
+											<img src="{% if slide.image %}
+													{% cropped_thumbnail slide "cropping" %}
+												{% else %}
+												{% cropped_thumbnail slide.article "cropping" %}
+											{% endif %}" class="center-block img-responsive">
+											<div class="carousel-caption"><h3>{% if slide.description %}
+													{{slide.description|safe}}
+												{% else %}
+												{{slide.article.title}}
+											{% endif %}</h3></div>
+										</div>
+										{% endfor %}
+										
+										
+										
+									</div>
+									<a class="carousel-control left" href="#slideshow" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span>
+									</a>
+									<a class="carousel-control right" href="#slideshow" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span>
+									</a>
+								</div>
+								{% endblock content %}
+							</div>
+							<div class="col-md-4 col-md-pull-8 col-sm-12 col-xs-12">
+								<section>
+									{% include "m_article/sidecolumn.html" with listname="Multimedia" itemlist=multimedia %}
+								</section>
+								<section>
+									<ul id="myTab" class="nav nav-tabs">
+									   <li class="active">
+									      <a href="#home" data-toggle="tab">
+									         مطالب داغ
+									      </a>
+									   </li>
+									   <li><a href="#ios" data-toggle="tab">برترینها</a></li>
+  
+									</ul>
+									<div id="myTabContent" class="tab-content">
+									   <div class="tab-pane fade in active" id="home">
+									   		{% include "m_article/tabbed_sidecolumn.html" with listname="Multimedia" itemlist=multimedia %}
+									   </div>
+									   <div class="tab-pane fade" id="ios">
+									   		{% include "m_article/tabbed_sidecolumn.html" with listname="Multimedia" itemlist=multimedia %}
+									   </div>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+		</div><!--end .container -->
+		<div class="site-footer container-fluid">
+			<div class="container">
+				<ul>
+					<li><a href="#">صفحه اصلی</a></li>
+					<li><span class="circle">&#9898</span></li>
+					<li><a href="#">تماس با ما</a></li>
+					<li><span class="circle">&#9898</span></li>
+					<li><a href="#">درباره ما</a></li>
+				</ul>
+				<span class="clearfix"></span>
+				<p>استفاده از مطالب سایت در صورت ذکر منبع بلامانع است</p>
+				<div class="ssk-group ssk-sm">
+				    <a href="" class="ssk ssk-facebook"></a>
+				    <a href="" class="ssk ssk-twitter"></a>
+				    <a href="" class="ssk ssk-google-plus"></a>
+				    <a href="" class="ssk ssk-linkedin"></a>
+				    <a href="" class="ssk ssk-instagram"></a>
+				</div>
+			</div>
+		</div>
+
+		<script>
+	$(document).ready(function(){
+		var like_input=$("#id_like");
+		var dislike_input=$("#id_dislike");
+		var form=$("#form_");
+		var status="none";
+		if(like_input.is(":checked")){
+			status="liked";
+		}else if(dislike_input.is(":checked")){
+			status="disliked";
+		}
+		if(status=="liked"){
+			$("#like_btn").css("font-size","large");
+		}else if (status=="disliked") {
+			$("#dislike_btn").css("font-size","large");
+		}
+		$("#form_").hide();
+		$("#like_btn").click(function(){
+									if(status=="liked"){
+										like_input.attr("checked",false);
+										form.submit();
+									}else{
+										like_input.attr("checked",true);
+										dislike_input.attr("checked",false);
+										form.submit();
+									}
+								});
+		$("#dislike_btn").click(function(){
+									if(status=="disliked"){
+										dislike_input.attr("checked",false);
+										form.submit();
+									}else{
+										dislike_input.attr("checked",true);
+										like_input.attr("checked",false);
+										form.submit();
+									}	
+								});
+		});
+</script>
+	<script>
+		$(document).ready(function(){
+					var search_btn=$("#search_btn");
+					var search_field=$("#search_field");
+					search_btn.click(function(){
+								var get_str='/jobs/?keywords=';
+								var get_str1=search_field.val().split(' ').join('+');
+								window.open(get_str.concat(get_str1),'_blank');
+								});
+					});
+	</script>
+    {% block buttom_script %}
+    
+    {% endblock %}
+	</body>
+</html>

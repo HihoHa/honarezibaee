@@ -1,0 +1,33 @@
+{% load staticfiles %}
+{% load bootstrap3 %}
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static "css/master.css" %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!--{# <link rel="stylesheet" type="text/css" href="{% static "bootstrap-responsive-rtl.min.css" %} ">
+    <link rel="stylesheet" type="text/css" href="{% static "bootstrap-rtl.min.css" %}"> #}!-->
+    <title>Log in</title>
+</head>
+<body>
+    {% bootstrap_messages %}
+    {% if user.is_authenticated %}
+        <div class="alert alert-info" role="alert">You are already signed in {{user.username}}
+        <p><a class="alert-link" href="{% url 'logout_view' %}?next={{ request.path_info }}">Sign Out</a></p></div>
+    {% else %}
+        {% if error_message %}
+            <div class="alert alert-danger" role="alert">{{ error_message|safe }}</div>
+    {% endif %}
+        <form role="form" action="{% url 'login_view' %}" method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+            <button type="submit" class="btn btn-primary">
+                Login
+          </button>
+          {% endbuttons %}
+      </form>
+      {% endif %}
+
+  </body>
+  </html>
