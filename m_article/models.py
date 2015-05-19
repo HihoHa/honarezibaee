@@ -143,4 +143,4 @@ class SlideShow(models.Model):
 
 class FirstPageLinks(models.Model):
     category = models.ForeignKey(ArticleCategory)
-    tag = models.ForeignKey(ArticleTag, required=False, null=True, blank=True)
+    tag = models.ForeignKey(ArticleTag, null=True, blank=True)

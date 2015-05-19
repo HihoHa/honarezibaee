@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'geoposition',
     'PIL' ,
+    'ckeditor',
     'django_wysiwyg',
 )
 
@@ -106,6 +107,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'my_static')
 TEMPLATE_CONTEXT_PROCESSORS = ('django.core.context_processors.request',
                                'django.contrib.auth.context_processors.auth',
                                'django.contrib.messages.context_processors.messages',)
@@ -130,3 +132,7 @@ GEOPOSITION_MARKER_OPTIONS = {
 
 mimetypes.add_type("image/svg+xml", ".svg", True)
 mimetypes.add_type("image/svg+xml", ".svgz", True)
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_IMAGE_BACKEND = 'pillow'
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+DJANGO_WYSIWYG_FLAVOR = "ckeditor"

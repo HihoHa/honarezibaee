@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^login/$', views.login_view, name="login_view"),
     url(r'^jobs/', include('jobs.urls')),
     url(r'^api/', include('apis.urls')),
+    url(r'^ckeditor/', include('ckeditor.urls')),
 )
 
 

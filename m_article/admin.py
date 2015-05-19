@@ -13,6 +13,7 @@ import os
 from urlparse import urljoin
 from datetime import datetime, timedelta
 from image_cropping import ImageCroppingMixin
+from ckeditor.widgets import CKEditorWidget
 
 MEDIA_ROOT, MEDIA_URL = settings.MEDIA_ROOT, settings.MEDIA_URL
 
@@ -31,6 +32,7 @@ class ArticleAdminForm(forms.ModelForm):
     multifile = MultiFileField(required=False, max_file_size=5*1024*1024)
     download_images = forms.BooleanField(required=False)
     clean_style = forms.BooleanField(required=False)
+    content = forms.CharField(widget=CKEditorWidget())
     # update_related_articles = forms.BooleanField(required=False)
 
     class Meta:
@@ -89,12 +91,15 @@ class ArticleAdminForm(forms.ModelForm):
         return a
 
 
-class ArticleAdmin(ImageCroppingMixin):  # , SummernoteModelAdmin):
+class ArticleAdmin(admin.ModelAdmin, ImageCroppingMixin):  # , SummernoteModelAdmin):
     form = ArticleAdminForm
-    change_form_tamplate = 'm_article/admin/change_form.html'
+    # change_form_tamplate = 'm_article/admin/change_form.html'
 
-    fields = ('title', 'content', 'clean_style', 'multifile', 'tags', 'category',
-              'created_at', 'download_images', 'cropping', 'video',
+    fields = ('title', 'content', 'clean_style', 'multifile',
+              'tags', 'category',
+              'created_at',
+              'download_images',
+              'cropping', 'video',
               'image', 'small_image', 'related_articles', 'publish',
               'archive', 'likes', 'dislikes', 'views', 'citations', 'do_not_publish_until')
     readonly_fields = ('created_at', 'likes', 'dislikes', 'views', 'small_image', 'citations')
