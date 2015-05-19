@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'geoposition',
     'PIL' ,
+    'django_wysiwyg',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -89,8 +89,9 @@ class ArticleAdminForm(forms.ModelForm):
         return a
 
 
-class ArticleAdmin(ImageCroppingMixin, SummernoteModelAdmin):
+class ArticleAdmin(ImageCroppingMixin):  # , SummernoteModelAdmin):
     form = ArticleAdminForm
+    change_form_tamplate = 'm_article/admin/change_form.html'
 
     fields = ('title', 'content', 'clean_style', 'multifile', 'tags', 'category',
               'created_at', 'download_images', 'cropping', 'video',
