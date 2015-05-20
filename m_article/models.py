@@ -30,7 +30,18 @@ class ArticleTag(NS_Node):
 class ArticleCategory(NS_Node):
     name = models.CharField(max_length=100, unique=True)
     node_order_by = ['name', ]
-    menu_tags = models.ManyToManyField(ArticleTag)
+    menu_tags = models.ManyToManyField(ArticleTag, blank=True, null=True)
+    ordering = models.IntegerField(default=0)
+
+    def children(self):
+        return self.get_children().order_by('ordering')
+
+    def get_suggestion_root(self):
+        if self.is_root() or self.is_child_of(self.get_root()):
+            return self
+        else:
+            return self.get_ancestors()[1]
+
 
     def __unicode__(self):
         return self.name
@@ -83,7 +94,14 @@ class Article(models.Model):
     def get_by_category(cls, category_name):
         category_node = ArticleCategory.objects.get(name=category_name)
         category_tree = ArticleCategory.get_tree(category_node)
-        return Article.non_archived_objects.filter(category__in=category_tree)
+        return Article.non_archived_objects.filter(category__in=category_tree).distinct()
+
+    def get_suggestion_query(self):
+        category = self.category.all().first()
+        if category is None:
+            return None
+        suggestion_root = category.get_suggestion_root()
+        return Article.get_by_category(suggestion_root)
 
     def update_small_image(self):
         """ikhtar!!! doesnt save the model!!!"""
@@ -102,12 +120,14 @@ class Article(models.Model):
         return self.title
 
     def update_related_articles(self):
-        how_many = 6 - len(Article.objects.get(pk=self.pk).related_articles.all())
-        if how_many > 0:
-            for article in Article.non_archived_objects.filter(
+        how_many = 5 - self.related_articles.count()
+        if how_many > 0 and self.get_suggestion_query() is not None:
+            for article in self.get_suggestion_query().filter(
                     created_at__gte=self.created_at - timedelta(days=45)).filter(
                     created_at__lte=self.created_at + timedelta(days=45)).exclude(pk=self.pk).exclude().order_by('citations')[:how_many]:
                 self.related_articles.add(article)
+        else:
+            pass
 
 @receiver(m2m_changed, sender=Article.related_articles.through, dispatch_uid="update_citations")
 def my_handler(sender, instance, action, reverse, pk_set, **kwargs):
@@ -128,7 +148,7 @@ def update_handler(sender, instance, action, *args, **kwargs):
 
 @receiver(post_save, sender=Article, weak=False, dispatch_uid="post_save_update")
 def update_related(sender, instance, **kwargs):
-    m2m_changed.connect(update_handler, sender=Article.related_articles.through, weak=False, dispatch_uid='post_save_m2m_update')
+    m2m_changed.connect(update_handler, sender=Article.related_articles.through, weak=False)#, dispatch_uid='post_save_m2m_update')
 
 
 class SlideShow(models.Model):

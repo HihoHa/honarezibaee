@@ -4,7 +4,7 @@
   {% if item.get_children.all or item.menu_tags.all %}
   <ul class="dropdown-menu">
   {% if item.get_children.all %}
-    {% with  menuitems=item.get_children template_name="menu.html" view_name=view_name %}
+    {% with  menuitems=item.children template_name="menu.html" view_name=view_name %}
         {% include template_name %}
     {% endwith %}
   {% endif %}

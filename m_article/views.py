@@ -25,7 +25,7 @@ class BaseView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(BaseView, self).get_context_data(**kwargs)
-        context['menuitems'] = ArticleCategory.get_root_nodes()
+        context['menuitems'] = ArticleCategory.get_root_nodes().order_by('ordering')
         context['multimedia'] = Article.m_get_by_tag('multimedia')[0:10]  # todo: hotest
         context['talks'] = Article.m_get_by_tag('talk')[0:10]  # todo: hotest
         context['view_name'] = self.view_name
@@ -76,6 +76,7 @@ class ArticleView(BaseView):
         context['vote_form'] = VoteForm(instance=self.opinion)
         # context['comments'] = ArticleComment.objects.filter(article = self.article).filter(is_verified=True)
         context['cookie_user'] = self.cookie_user
+        context['recent_related'] = Article.get_by_category(self.article.category.all().first().get_root()).order_by('-created_at')[:6]
         return context
 
     def render_to_response(self, context, **response_kwargs):
