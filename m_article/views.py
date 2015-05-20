@@ -26,8 +26,8 @@ class BaseView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(BaseView, self).get_context_data(**kwargs)
         context['menuitems'] = ArticleCategory.get_root_nodes().order_by('ordering')
-        context['multimedia'] = Article.m_get_by_tag('multimedia')[0:10]  # todo: hotest
-        context['talks'] = Article.m_get_by_tag('talk')[0:10]  # todo: hotest
+        context['multimedia'] = None
+        context['talks'] = None
         context['view_name'] = self.view_name
         context['slides'] = SlideShow.objects.all()
         context['short_links'] = FirstPageLinks.objects.all()
