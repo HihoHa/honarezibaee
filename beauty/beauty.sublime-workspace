@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"edit",
+				"edit_image_attr"
+			],
+			[
 				"Mode",
 				"ModelForm	ModelForm"
 			],
@@ -251,7 +255,7 @@
 			"file": "/home/ali/Workspace/beauty/beauty/templates/base.html",
 			"settings":
 			{
-				"buffer_size": 7815,
+				"buffer_size": 8595,
 				"line_ending": "Unix"
 			}
 		},
@@ -259,7 +263,7 @@
 			"file": "/home/ali/Workspace/beauty/beauty/m_article/views.py",
 			"settings":
 			{
-				"buffer_size": 7316,
+				"buffer_size": 7519,
 				"line_ending": "Unix"
 			}
 		},
@@ -267,7 +271,7 @@
 			"file": "/home/ali/Workspace/beauty/beauty/m_article/models.py",
 			"settings":
 			{
-				"buffer_size": 5780,
+				"buffer_size": 7198,
 				"line_ending": "Unix"
 			}
 		},
@@ -283,7 +287,7 @@
 			"file": "settings.py",
 			"settings":
 			{
-				"buffer_size": 3397,
+				"buffer_size": 3962,
 				"line_ending": "Unix"
 			}
 		},
@@ -307,7 +311,47 @@
 			"file": "/home/ali/Workspace/beauty/beauty/m_article/urls.py",
 			"settings":
 			{
-				"buffer_size": 609,
+				"buffer_size": 606,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/ali/Workspace/beauty/beauty/m_article/admin.py",
+			"settings":
+			{
+				"buffer_size": 6296,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/ali/Workspace/beauty/beauty/m_article/utils.py",
+			"settings":
+			{
+				"buffer_size": 1765,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/ali/Workspace/beauty/beauty/cookie_user/models.py",
+			"settings":
+			{
+				"buffer_size": 915,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "utils.py",
+			"settings":
+			{
+				"buffer_size": 1558,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/ali/Workspace/beauty/beauty/templates/flatpages/default.html",
+			"settings":
+			{
+				"buffer_size": 121,
 				"line_ending": "Unix"
 			}
 		}
@@ -336,6 +380,7 @@
 	},
 	"file_history":
 	[
+		"/home/ali/Workspace/beauty/beauty/m_flatpage/models.py",
 		"/home/ali/Workspace/beauty/beauty/m_article/models.py",
 		"/home/ali/Workspace/beauty/beauty/m_article/admin.py",
 		"/home/ali/Workspace/beauty/beauty/jobs/admin.py",
@@ -418,6 +463,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"default",
+			"reverse",
+			"util",
 			"comment",
 			"	",
 			"\\t",
@@ -504,7 +552,7 @@
 					"file": "/home/ali/Workspace/beauty/beauty/templates/base.html",
 					"settings":
 					{
-						"buffer_size": 7815,
+						"buffer_size": 8595,
 						"regions":
 						{
 						},
@@ -531,43 +579,15 @@
 					"file": "/home/ali/Workspace/beauty/beauty/m_article/views.py",
 					"settings":
 					{
-						"buffer_size": 7316,
+						"buffer_size": 7519,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1435,
-								1435
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Djaneiro-master/Syntaxes/Python Django.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 483.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/home/ali/Workspace/beauty/beauty/m_article/models.py",
-					"settings":
-					{
-						"buffer_size": 5780,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5780,
-								5780
+								0,
+								0
 							]
 						],
 						"settings":
@@ -578,6 +598,34 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/home/ali/Workspace/beauty/beauty/m_article/models.py",
+					"settings":
+					{
+						"buffer_size": 7198,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro-master/Syntaxes/Python Django.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 621.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -614,15 +662,15 @@
 					"file": "settings.py",
 					"settings":
 					{
-						"buffer_size": 3397,
+						"buffer_size": 3962,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1906,
+								1906
 							]
 						],
 						"settings":
@@ -632,7 +680,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2277.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -649,8 +697,8 @@
 						"selection":
 						[
 							[
-								1161,
-								1161
+								451,
+								451
 							]
 						],
 						"settings":
@@ -660,7 +708,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 619.0,
+						"translation.y": 345.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -688,7 +736,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 552.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -698,7 +746,7 @@
 					"file": "/home/ali/Workspace/beauty/beauty/m_article/urls.py",
 					"settings":
 					{
-						"buffer_size": 609,
+						"buffer_size": 606,
 						"regions":
 						{
 						},
@@ -713,7 +761,145 @@
 						{
 							"syntax": "Packages/Djaneiro-master/Syntaxes/Python Django.tmLanguage"
 						},
-						"translation.x": 468.0,
+						"translation.x": 62.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "/home/ali/Workspace/beauty/beauty/m_article/admin.py",
+					"settings":
+					{
+						"buffer_size": 6296,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro-master/Syntaxes/Python Django.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1449.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "/home/ali/Workspace/beauty/beauty/m_article/utils.py",
+					"settings":
+					{
+						"buffer_size": 1765,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1667,
+								1667
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro-master/Syntaxes/Python Django.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 489.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "/home/ali/Workspace/beauty/beauty/cookie_user/models.py",
+					"settings":
+					{
+						"buffer_size": 915,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro-master/Syntaxes/Python Django.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "utils.py",
+					"settings":
+					{
+						"buffer_size": 1558,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro-master/Syntaxes/Python Django.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 690.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "/home/ali/Workspace/beauty/beauty/templates/flatpages/default.html",
+					"settings":
+					{
+						"buffer_size": 121,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								119,
+								119
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro-master/Syntaxes/HTML (Django).tmLanguage"
+						},
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
@@ -763,6 +949,50 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"base.",
+				"templates/base.html"
+			],
+			[
+				"mmodel",
+				"m_article/models.py"
+			],
+			[
+				"def",
+				"templates/flatpages/default.html"
+			],
+			[
+				"murl",
+				"m_article/urls.py"
+			],
+			[
+				"util",
+				"m_article/utils.py"
+			],
+			[
+				"cook",
+				"cookie_user/models.py"
+			],
+			[
+				"mutil",
+				"m_article/utils.py"
+			],
+			[
+				"madm",
+				"m_article/admin.py"
+			],
+			[
+				"mmodl",
+				"m_article/models.py"
+			],
+			[
+				"flatmo",
+				"m_flatpage/models.py"
+			],
+			[
+				"sett",
+				"beauty/settings.py"
+			],
 			[
 				"url",
 				"m_article/urls.py"
@@ -820,20 +1050,12 @@
 				"jobs/templates/jobs/base.html"
 			],
 			[
-				"madm",
-				"m_article/admin.py"
-			],
-			[
 				"mmod",
 				"m_article/models.py"
 			],
 			[
 				"jd",
 				"jobs/templates/jobs/job_detail.html"
-			],
-			[
-				"sett",
-				"beauty/settings.py"
 			],
 			[
 				"jde",
@@ -912,10 +1134,6 @@
 				"jobs/forms.py"
 			],
 			[
-				"mmodel",
-				"m_article/models.py"
-			],
-			[
 				"jmo",
 				"jobs/models.py"
 			],
@@ -929,10 +1147,6 @@
 			],
 			[
 				"cm",
-				"cookie_user/models.py"
-			],
-			[
-				"cook",
 				"cookie_user/models.py"
 			],
 			[
@@ -1002,10 +1216,6 @@
 			[
 				"jobsearch",
 				"jobs/templates/jobs/job_search.html"
-			],
-			[
-				"mmodl",
-				"m_article/models.py"
 			],
 			[
 				"sear.ht",
@@ -1096,10 +1306,6 @@
 				"cookie_user/models.py"
 			],
 			[
-				"murl",
-				"m_article/urls.py"
-			],
-			[
 				"mv",
 				"m_article/views.py"
 			],
@@ -1140,10 +1346,6 @@
 				"cookie_user/models.py"
 			],
 			[
-				"mutil",
-				"m_article/utils.py"
-			],
-			[
 				"articlelist",
 				"m_article/templates/m_article/article_list.html"
 			],
@@ -1174,10 +1376,6 @@
 			[
 				"arlist",
 				"m_article/templates/m_article/article_list.html"
-			],
-			[
-				"util",
-				"beauty/utils.py"
 			],
 			[
 				"vew",
@@ -1262,18 +1460,6 @@
 			[
 				"login",
 				"templates/login.html"
-			],
-			[
-				"artchtml",
-				"m_article/templates/m_article/article.html"
-			],
-			[
-				"artcl",
-				"m_article/templates/m_article/article_list.html"
-			],
-			[
-				"article.html",
-				"m_article/templates/m_article/article.html"
 			]
 		],
 		"width": 0.0

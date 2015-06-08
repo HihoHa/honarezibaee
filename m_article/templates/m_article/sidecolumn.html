@@ -9,7 +9,9 @@
 						<a href="/">
 						<img class="list-img" src="{% cropped_thumbnail item "small_cropping" %}"  alt="{{ item.title }}" width="100px" height="140px"></a>
 					<a href="{% url 'article_view' article_title=item.title %}"><h4 class="item-heading">{{ item.title }}</h4></a><br />
-					<p class="description">{{ item.short_description }}</p>
+					{% if article.short_description %}
+                    <p class="description">{{ article.short_description }}</p>
+                {% endif %}
 				</div>
 			</li>
 			{% endfor %}

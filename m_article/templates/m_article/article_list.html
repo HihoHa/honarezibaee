@@ -3,17 +3,40 @@
 {% load cropping %}
 {% load bootstrap3 %}
 {% block content %}
+    {% if category.is_multimedia %}
+    <div class="container-fluid">
+    <div class="row">
+
+    {% for m_category in category.children %}
+        <nav class="col-md-4"><ul class="nav nav-tabs nav-justified">
+            <li role="presentation"><a href="{% url 'article_view_by_category' category_name=m_category.complete_url%}">
+            {{ m_category.name }}</a></li></ul>
+        <ul class="nav nav-tabs nav-justified ">
+            {% for child in m_category.children %}
+            <li role="presentation"><a href="#">{{ child.name }}</a></li>
+            {% endfor %}
+
+        </ul>
+        </nav>
+    {% endfor %}
+
+    </div>
+    </div>
+    {% endif %}
     <ul class="article-list">
 	{% for article in articles %}
         <li class="article">
-            <a class="pull-right" href="{% url 'article_view' article_title=article.title %}">
+            <a class="pull-right" href="{% url 'article_view' article_title=article.title category_name=article.first_category.url_prefix%}">
                 <div class="thumbnail"><img src="{% cropped_thumbnail article "cropping" %}" width="200px" height="140px"></div></a>
                 <div class="item-body">
-                    <a href="{% url 'article_view' article_title=article.title %}">
+                    <a href="{% url 'article_view' article_title=article.title category_name=article.first_category.url_prefix%}">
                     <h4 class="article-heading">{{ article.title }} </h4></a>
                     <span class="clearfix"></span>
                 </div>
-                <p class="description">{{ article.content|first_paragraph}}</p>
+                {% if article.short_description %}
+                    <p class="description">{{ article.short_description }}</p>
+                {% endif %}
+
         </li>  
 	{% endfor %}
     </ul>

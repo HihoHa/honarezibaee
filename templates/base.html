@@ -98,6 +98,7 @@
 											<div class="{% if not  forloop.counter0 %}
 												active
 											{% endif %}  item">
+                                            <a href="{% url 'article_view' category_name=slide.article.first_category.url_prefix article_title=slide.article.title%}">
 											<img src="{% if slide.image %}
 													{% cropped_thumbnail slide "cropping" %}
 												{% else %}
@@ -105,9 +106,12 @@
 											{% endif %}" class="center-block img-responsive">
 											<div class="carousel-caption"><h3>{% if slide.description %}
 													{{slide.description|safe}}
-												{% else %}
+												{% elif slide.article.short_description%}
+                                                    {{slide.article.short_description}}
+                                                {% else %}
 												{{slide.article.title}}
 											{% endif %}</h3></div>
+                                            </a>
 										</div>
 										{% endfor %}
 										
@@ -123,7 +127,25 @@
 							</div>
 							<div class="col-md-4 col-md-pull-8 col-sm-12 col-xs-12">
 								<section>
-									{% include "m_article/sidecolumn.html" with listname="Multimedia" itemlist=multimedia %}
+									<div class="panel panel-default">
+                                      <!-- Default panel contents -->
+                                      <div class="panel-heading">عکس و فیلم</div>
+
+
+                                      <!-- List group -->
+                                      <ul class="list-group">
+
+                                          {% for media_category in multimedia_categories %}
+                                              <a href="{% url 'article_view_by_category' category_name=media_category.complete_url %}" class="list-group-item
+                                              {% if media_category == category %}
+                                              active
+                                              {% endif %}
+                                              ">{{ media_category.multimedia_name }}</a>
+                                          {% endfor %}
+
+
+                                      </ul>
+                                    </div>
 								</section>
 								<section>
 									<ul id="myTab" class="nav nav-tabs">
@@ -137,10 +159,10 @@
 									</ul>
 									<div id="myTabContent" class="tab-content">
 									   <div class="tab-pane fade in active" id="home">
-									   		{% include "m_article/tabbed_sidecolumn.html" with listname="Multimedia" itemlist=multimedia %}
+									   		{% include "m_article/tabbed_sidecolumn.html" with listname="Multimedia" itemlist=hot %}
 									   </div>
 									   <div class="tab-pane fade" id="ios">
-									   		{% include "m_article/tabbed_sidecolumn.html" with listname="Multimedia" itemlist=multimedia %}
+									   		{% include "m_article/tabbed_sidecolumn.html" with listname="Multimedia" itemlist=best %}
 									   </div>
 									</div>
 								</section>

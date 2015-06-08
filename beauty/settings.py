@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'm_article',
     'jobs',
     'apis',
@@ -51,6 +52,7 @@ INSTALLED_APPS = (
     'PIL' ,
     'ckeditor',
     'django_wysiwyg',
+    'django.contrib.flatpages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -61,7 +63,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
+
+SITE_ID = 1
 
 ROOT_URLCONF = 'beauty.urls'
 

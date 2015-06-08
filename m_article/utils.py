@@ -17,7 +17,7 @@ def get_article_from_url(url):
 def get_tag_from_url(url):
     return tag_name_regex.search(url).group()
 
-cleaner = Cleaner(style=True, page_structure=True)
+cleaner = Cleaner(style=True, page_structure=True, remove_tags=['a'], scripts=True)
 
 def unique_name(link):
     i = link.rfind('.')
@@ -36,4 +36,13 @@ def localize(document, download_folder=MEDIA_ROOT, base_url='http://'):
             for chunk in request.iter_content(chunk_size):
                 fd.write(chunk)
         link['src'] = urljoin(MEDIA_URL, file_name)
+    return soup.prettify()
+
+def edit_image_attr(document, url, alt):
+    soup = BeautifulSoup(document)
+    for img in soup('img'):
+        img['alt'] = alt
+        img['title'] = alt
+        link = img.wrap(soup.new_tag('a'))
+        link['href'] = url
     return soup.prettify()

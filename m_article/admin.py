@@ -3,10 +3,10 @@ from django.contrib import admin
 from treebeard.admin import TreeAdmin
 from treebeard.forms import movenodeform_factory
 from django.core.exceptions import ObjectDoesNotExist
-from m_article.models import Article, ArticleTag, ArticleCategory, SlideShow
+from m_article.models import Article, ArticleTag, ArticleCategory, SlideShow, ArticleUrlCategory
 from django_summernote.admin import SummernoteModelAdmin
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
-from m_article.utils import cleaner, localize
+from m_article.utils import cleaner, localize, edit_image_attr
 from multiupload.fields import MultiFileField
 from django.conf import settings
 import os
@@ -14,6 +14,7 @@ from urlparse import urljoin
 from datetime import datetime, timedelta
 from image_cropping import ImageCroppingMixin
 from ckeditor.widgets import CKEditorWidget
+from django.core.urlresolvers import reverse
 
 MEDIA_ROOT, MEDIA_URL = settings.MEDIA_ROOT, settings.MEDIA_URL
 
@@ -52,9 +53,10 @@ class ArticleAdminForm(forms.ModelForm):
         publish = data.get('publish')
         archive = data.get('archive')
         clean = data.get('clean_style')
+        content = data.get('content')
         if clean:
-            content = data.get('content')
-            data['content'] = cleaner.clean_html(content)
+            content = cleaner.clean_html(content)
+        data['content'] = edit_image_attr(content, url=reverse('article_view', kwargs={'article_title': data['title'], 'category_name': data['category'].all().first().url_prefix()}), alt=data['title'])
         if not publish and not archive:
             raise forms.ValidationError("A non publishable article should be archived.")
         return data
@@ -104,7 +106,8 @@ class ArticleAdmin(ImageCroppingMixin, admin.ModelAdmin):  # , SummernoteModelAd
               'archive', 'likes', 'dislikes', 'views', 'citations', 'do_not_publish_until')
     readonly_fields = ('created_at', 'likes', 'dislikes', 'views', 'small_image', 'citations')
     list_filter = ('category', 'tags', 'publish', 'archive')
-    list_display = ('title', 'publish', 'archive', 'created_at')
+    list_display = ('title', 'publish', 'archive', 'created_at', 'likes', 'dislikes', 'first_category')
+    ordering = ('created_at',)
     list_editable = ('publish', 'archive')
     search_fields = ('title',)
     filter_horizontal = ('tags', 'category', 'related_articles')
@@ -133,7 +136,29 @@ class SlideShowForm(forms.ModelForm):
 class SlideShowAdmin(SummernoteModelAdmin):
     form = SlideShowForm
 
+
+from django.contrib.flatpages.models import FlatPage
+ 
+# Note: we are renaming the original Admin and Form as we import them!
+from django.contrib.flatpages.admin import FlatPageAdmin as FlatPageAdminOld
+from django.contrib.flatpages.admin import FlatpageForm as FlatpageFormOld
+
+class FlatpageForm(FlatpageFormOld):
+    content = forms.CharField(widget=CKEditorWidget())
+    class Meta:
+        model = FlatPage # this is not automatically inherited from FlatpageFormOld
+ 
+ 
+class FlatPageAdmin(FlatPageAdminOld):
+    form = FlatpageForm
+ 
+ 
+# We have to unregister the normal admin, and then reregister ours
+admin.site.unregister(FlatPage)
+admin.site.register(FlatPage, FlatPageAdmin)
+
 admin.site.register(ArticleTag, TagAdmin)
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(ArticleCategory, CategoryAdmin)
 admin.site.register(SlideShow, SlideShowAdmin)
+admin.site.register(ArticleUrlCategory)

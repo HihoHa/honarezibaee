@@ -14,35 +14,42 @@
   {% endfor %}
 {% endif %}
 
- <form id="form_" method="post" action="{% url 'article_view' article_title=article.title %}" class="hidden">
-    {% csrf_token %}
-{{vote_form.as_p}}
-<input type="submit" value="submit">
-</form>
+
 
 <br>
-   <h3>{{ article.title }}</h3>
+   <h3><a href="{% url 'article_view' article_title=article.title category_name=article.first_category.url_prefix%}">{{ article.title }}</a></h3>
    <span class="badge">{{article.likes}}</span>
    <span id="like_btn" class="glyphicon glyphicon-thumbs-up"></span>
    <span id="dislike_btn" class="glyphicon glyphicon-thumbs-down"></span>
    <span class="badge">{{article.dislikes}}</span>
    
     <article>
+
+        {{ article.content|safe }}
     {% if article.video %}
             <div style="width:80%; max-width: 640px; margin: 0 auto;"><video src="{{ article.video.url }}" width="320" height="240" controls="controls" style="width:100%;height:100%;" controls="controls" width="100%" height="100%"></video></div>
     {% endif %}
-        {{ article.content|safe }}</article>
+    </article>
+    {% for tag in article.all_tags %}
+        <span class="badge">{{tag.name}}</span>
+    {% endfor %}
+
+    <form id="form_" method="post" action="{% url 'article_view' article_title=article.title category_name=article.first_category.url_prefix%}" class="hidden">
+    {% csrf_token %}
+{{vote_form.as_p}}
+<input type="submit" value="submit">
+</form>
  {% if related_articles %}
      <p>مطالب مرتبط:</p>
 {% for article in related_articles %}
 
-    <p><a href="{% url 'article_view' article_title=article.title %}">{{ article.title }}</a></p>
+    <p><a href="{% url 'article_view' article_title=article.title category_name=article.first_category.url_prefix%}">{{ article.title }}</a></p>
 {% endfor %}
 
  {% endif %}
     <p>جدیدترین مطالب  {{ article.category.all.first.get_root.name }}:</p>
     {% for article in recent_related %}
-        <p><a href="{% url 'article_view' article_title=article.title %}">{{ article.title }}</a></p>
+        <p><a href="{% url 'article_view' article_title=article.title category_name=article.first_category.url_prefix%}">{{ article.title }}</a></p>
     {% endfor %}
 
 

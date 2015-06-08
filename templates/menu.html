@@ -1,5 +1,5 @@
 {% for item in menuitems %}
-  <li><a href="{% url view_name category_name=item.name %}">{{item.name}}</a>
+  <li><a href="{% url view_name category_name=item.complete_url %}">{{item.name}}</a>
 
   {% if item.get_children.all or item.menu_tags.all %}
   <ul class="dropdown-menu">
@@ -10,7 +10,7 @@
   {% endif %}
   {% if item.menu_tags %}
   {% for tag in item.menu_tags.all %}
-    <li><a href="{% url view_name category_name=item.name %}?tag={{ tag.name }}">{{ tag.name }}</a></li>
+    <li><a href="{% url view_name category_name=item.complete_url %}?tag={{ tag.name }}">{{ tag.name }}</a></li>
   {% endfor %}
   {% endif %}
   </ul>

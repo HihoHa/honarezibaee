@@ -1,6 +1,6 @@
 from m_article.utils import get_article_from_url, get_tag_from_url
 from django.shortcuts import render_to_response, render, redirect
-from m_article.models import Article, ArticleTag, ArticleCategory, SlideShow, FirstPageLinks
+from m_article.models import Article, ArticleTag, ArticleCategory, SlideShow
 from django.views.generic import View, DetailView
 from django.views.generic.base import TemplateView
 from django.http import HttpResponse
@@ -15,6 +15,8 @@ from datetime import datetime
 from ipware.ip import get_ip  # todo: import and use get_real_ip instead
 import logging
 from django.utils import timezone
+from django.http import Http404
+from datetime import datetime, timedelta
 
 logger = logging.getLogger('django')
 
@@ -26,11 +28,12 @@ class BaseView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(BaseView, self).get_context_data(**kwargs)
         context['menuitems'] = ArticleCategory.get_root_nodes().order_by('ordering')
-        context['multimedia'] = None
-        context['talks'] = None
+        new_articles = Article.non_archived_objects.filter(created_at__lte=(datetime.utcnow() - timedelta(days=15)))
+        context['hot'] = new_articles.order_by('-views')[:5]
+        context['best'] = new_articles.order_by('-likes')[:5]
         context['view_name'] = self.view_name
         context['slides'] = SlideShow.objects.all()
-        context['short_links'] = FirstPageLinks.objects.all()
+        context['multimedia_categories'] = ArticleCategory.objects.filter(is_multimedia=True)
         return context
 
 
@@ -65,6 +68,8 @@ class ArticleView(BaseView):
         return super(ArticleView, self).dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
+        if self.article.first_category().url_prefix() != self.kwargs['category_name']:
+            raise Http404(self.kwargs['category_name'] + '***' + self.article.first_category().url_prefix())
         self.article.views += 1
         self.article.save()
         return super(ArticleView, self).get(request, *args, **kwargs)
@@ -76,7 +81,7 @@ class ArticleView(BaseView):
         context['vote_form'] = VoteForm(instance=self.opinion)
         # context['comments'] = ArticleComment.objects.filter(article = self.article).filter(is_verified=True)
         context['cookie_user'] = self.cookie_user
-        context['recent_related'] = Article.get_by_category(self.article.category.all().first().get_root()).order_by('-created_at')[:6]
+        context['recent_related'] = Article.get_by_category(self.article.category.all().first().get_root()).exclude(pk=self.article.pk).order_by('-created_at')[:6]
         return context
 
     def render_to_response(self, context, **response_kwargs):
@@ -127,11 +132,9 @@ class ArticleListView(BaseView):
 
     def get_context_data(self, **kwargs):
         context = super(ArticleListView, self).get_context_data(**kwargs)
-        tag = kwargs['tag_name']
         page = self.request.GET.get('page')
         context['page'] = page
-        context['tag'] = tag
-        articles = Article.m_get_by_tag(tag)
+        articles = Article.non_archived_objects.all().order_by('-created_at')
         paginator = Paginator(articles, self.article_per_page)
         try:
             context['articles'] = paginator.page(page)
@@ -150,7 +153,9 @@ class ArticleListViewByCategory(BaseView):
         context = super(ArticleListViewByCategory, self).get_context_data(**kwargs)
         category_name = self.kwargs['category_name']
         page = self.request.GET.get('page')
-        articles = Article.get_by_category(category_name)
+        category = ArticleCategory.from_url_string(category_name)
+        articles = Article.get_by_category(category)
+        context['category'] = category
         tag = self.request.GET.get('tag')
         if tag:
             articles = articles.filter(tags__name=tag)

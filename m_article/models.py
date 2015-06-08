@@ -14,6 +14,7 @@ from datetime import datetime, timedelta
 from django.db.models.signals import m2m_changed, post_save
 from django.dispatch import receiver
 from django.core.urlresolvers import reverse
+from django.http import Http404
 
 
 SIZE = 205, 205  # size for thumbnails of article
@@ -27,11 +28,27 @@ class ArticleTag(NS_Node):
         return self.name
 
 
-class ArticleCategory(NS_Node):
+class ArticleUrlCategory(models.Model):
     name = models.CharField(max_length=100, unique=True)
+
+    def __unicode__(self):
+        return self.name
+
+
+class ArticleCategory(NS_Node):
+    name = models.CharField(max_length=100)  # only persian letters
+    multimedia_name = models.CharField(max_length=100, null=True, blank=True)
     node_order_by = ['name', ]
     menu_tags = models.ManyToManyField(ArticleTag, blank=True, null=True)
-    ordering = models.IntegerField(default=0)
+    ordering = models.FloatField(default=0)
+    is_multimedia = models.BooleanField(default=False)
+    url_name = models.ForeignKey(ArticleUrlCategory, null=True, blank=True)
+
+    def url_prefix(self):
+        return (self.get_root().url_name.name or self.complete_url())
+
+    def number_of_children(self):
+        return len(self.get_children())
 
     def children(self):
         return self.get_children().order_by('ordering')
@@ -42,9 +59,36 @@ class ArticleCategory(NS_Node):
         else:
             return self.get_ancestors()[1]
 
+    def complete_url(self):
+        if self.is_root():
+            return self.name + u'\u202E'
+        else:
+            return self.get_parent().complete_url() + '/' + self.name + u'\u202E'
+
+    @classmethod
+    def from_url_string(cls, url):
+        url = url.replace(u'\u202E', '/').replace(u'\u2069', '/')
+        m_list = filter(None, url.split('/'))
+        roots = cls.get_root_nodes()
+        category = cls.get_from_list_by_name(roots, m_list[0])
+        for i in range(1, len(m_list)):
+            category = cls.get_from_list_by_name(category.get_children(), m_list[i])
+            if not category:
+                raise Http404("category doesn't exists: " + m_list[i])
+        return category
+
+    @classmethod
+    def get_from_list_by_name(cls, m_list, name):
+        for item in m_list:
+            if item.name == name:
+                return item
+        return None
 
     def __unicode__(self):
-        return self.name
+        if self.is_root():
+            return self.name
+        else:
+            return self.get_parent().__unicode__() + ' |> ' + self.name
 
 
 class ArticleListManager(models.Manager):
@@ -65,14 +109,14 @@ class Article(models.Model):
     content = models.TextField()
     short_description = models.TextField(null=True, blank=True)
     tags = models.ManyToManyField(ArticleTag, null=True, blank=True)
-    category = models.ManyToManyField(ArticleCategory, null=True, blank=True)
+    category = models.ManyToManyField(ArticleCategory)
     created_at = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to='article_avatar/', default='no-picture.png')
     cropping = ImageRatioField('image', '500x360')
     small_cropping = ImageRatioField('image', '150x100')
     small_image = models.ImageField(upload_to='article_avatar/', null=True, blank=True)
-    publish = models.BooleanField(default=True)
-    archive = models.BooleanField(default=False)
+    publish = models.BooleanField(default=False)
+    archive = models.BooleanField(default=True)
     related_articles = models.ManyToManyField("self", null=True, blank=True)
     objects = models.Manager()
     non_archived_objects = ArticleListManager()
@@ -84,6 +128,21 @@ class Article(models.Model):
     video = models.FileField(upload_to='video/', null=True, blank=True)
     do_not_publish_until = models.DateTimeField(null=True, blank=True)
 
+    @property
+    def all_tags(self):
+        all_tags = []
+        for tag in self.tags.all():
+            all_tags += tag.get_ancestors()
+            all_tags.append(tag)
+        return list(set(all_tags))
+
+    @property
+    def description_or_title(self):
+        return self.short_description or self.title
+
+    def first_category(self):
+        return self.category.all().first()
+
     @classmethod
     def m_get_by_tag(cls, tag):
         tag_node = ArticleTag.objects.get(name=tag)
@@ -91,13 +150,12 @@ class Article(models.Model):
         return Article.non_archived_objects.filter(tags__in=tag_tree)
 
     @classmethod
-    def get_by_category(cls, category_name):
-        category_node = ArticleCategory.objects.get(name=category_name)
-        category_tree = ArticleCategory.get_tree(category_node)
+    def get_by_category(cls, category):
+        category_tree = ArticleCategory.get_tree(category)
         return Article.non_archived_objects.filter(category__in=category_tree).distinct()
 
     def get_suggestion_query(self):
-        category = self.category.all().first()
+        category = self.first_category()
         if category is None:
             return None
         suggestion_root = category.get_suggestion_root()
@@ -124,7 +182,7 @@ class Article(models.Model):
         if how_many > 0 and self.get_suggestion_query() is not None:
             for article in self.get_suggestion_query().filter(
                     created_at__gte=self.created_at - timedelta(days=45)).filter(
-                    created_at__lte=self.created_at + timedelta(days=45)).exclude(pk=self.pk).exclude().order_by('citations')[:how_many]:
+                    created_at__lte=self.created_at + timedelta(days=45)).exclude(pk=self.pk).order_by('citations')[:how_many]:
                 self.related_articles.add(article)
         else:
             pass
@@ -159,8 +217,3 @@ class SlideShow(models.Model):
 
     def __unicode__(self):
         return self.article.__unicode__()
-
-
-class FirstPageLinks(models.Model):
-    category = models.ForeignKey(ArticleCategory)
-    tag = models.ForeignKey(ArticleTag, null=True, blank=True)
