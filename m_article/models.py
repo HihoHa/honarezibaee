@@ -45,7 +45,10 @@ class ArticleCategory(NS_Node):
     url_name = models.ForeignKey(ArticleUrlCategory, null=True, blank=True)
 
     def url_prefix(self):
-        return (self.get_root().url_name.name or self.complete_url())
+        if self.get_root().url_name:
+            return self.get_root().url_name.name
+        else:
+            return self.complete_url()
 
     def number_of_children(self):
         return len(self.get_children())
