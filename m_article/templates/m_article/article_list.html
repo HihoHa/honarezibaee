@@ -30,12 +30,16 @@
                 <div class="thumbnail"><img src="{% cropped_thumbnail article "cropping" %}" width="200px" height="140px"></div></a>
                 <div class="item-body">
                     <a href="{% url 'article_view' article_title=article.title category_name=article.first_category.url_prefix %}">
-                    <h4 class="article-heading">{{ article.title }} </h4></a>
+                    <h4 class="article-heading">
+                        {% if article.short_description %}
+                    {{ article.short_description }}
+                {% else %}
+                        {{ article.title }}
+                    {% endif %}
+                    </h4></a>
                     <span class="clearfix"></span>
                 </div>
-                {% if article.short_description %}
-                    <p class="description">{{ article.short_description }}</p>
-                {% endif %}
+
 
         </li>  
 	{% endfor %}
