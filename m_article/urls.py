@@ -9,7 +9,7 @@ urlpatterns = patterns('',
     url(r'^$', views.ArticleListView.as_view()),
     url(r'^tag/(?P<tag_name>[^/]*)/$', views.ArticleListView.as_view(), name="tag_view"),
     url(r'^category/(?P<category_name>.*)/$', views.ArticleListViewByCategory.as_view(), name="article_view_by_category"),
-    url(r'^(?P<category_name>[^/]*)/(?P<article_title>[^/]*)/$', views.ArticleView.as_view(), name="article_view"),
+    url(r'^(?P<category_name>.*)/(?P<article_title>[^/]*)/$', views.ArticleView.as_view(), name="article_view"),
 
     # url(r'^$', views.test_page)
     )
