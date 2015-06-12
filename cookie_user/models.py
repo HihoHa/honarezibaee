@@ -10,6 +10,7 @@ class mCookieUser(models.Model):
     def __unicode__(self):
         return self.user_id
 
+
 class Opinion(models.Model):
     user = models.ForeignKey(mCookieUser)
     article = models.ForeignKey(Article)
@@ -23,4 +24,4 @@ class Opinion(models.Model):
             raise ValidationError('Opinion can not be both like and dislike at the same time.')
 
     def __unicode__(self):
-        return str(self.user) + " on " + str(self.article)
+        return unicode(self.user) + " on " + unicode(self.article)
