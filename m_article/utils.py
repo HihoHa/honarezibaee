@@ -43,6 +43,8 @@ def edit_image_attr(document, url, alt):
     for img in soup('img'):
         img['alt'] = alt
         img['title'] = alt
-        link = img.wrap(soup.new_tag('a'))
-        link['href'] = url
+        img['class'] = 'image-responsive'
+        if img.parent.name != u'a':
+            link = img.wrap(soup.new_tag('a'))
+            link['href'] = url
     return soup.prettify()

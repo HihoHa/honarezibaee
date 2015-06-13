@@ -31,7 +31,8 @@
     {% endif %}
     </article>
     {% for tag in article.all_tags %}
-        <span class="badge">{{tag.name}}</span>
+        <span class="badge"><a href="{% url 'tag_view' tag_name=tag.name%}">{{tag.name}}</a>
+        </span>
     {% endfor %}
 
     <form id="form_" method="post" action="{% url 'article_view' article_title=article.title category_name=article.first_category.url_prefix%}" class="hidden">

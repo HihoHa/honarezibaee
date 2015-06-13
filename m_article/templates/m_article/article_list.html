@@ -31,10 +31,12 @@
                 <div class="item-body">
                     <a href="{% url 'article_view' article_title=article.title category_name=article.first_category.url_prefix %}">
                     <h4 class="article-heading">
+                    {{ article.title }}
+
                         {% if article.short_description %}
+                            <div>
                     {{ article.short_description }}
-                {% else %}
-                        {{ article.title }}
+                            </div>
                     {% endif %}
                     </h4></a>
                     <span class="clearfix"></span>

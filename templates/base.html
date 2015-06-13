@@ -85,14 +85,15 @@
 					<div class="col-md-10 col-md-pull-2 col-sm-9 col-sm-pull-3 col-xs-12">
 						<div class="row">
 							<div class="col-md-8 col-md-push-4 col-sm-12 col-xs-12">
-								{% block content %}
-								<div id="slideshow" class="carousel slide" data-interval="5000" data-ride="carousel">
+								{% block slideshow %}
+                                    {% if slides %}
+                                    <div id="slideshow" class="carousel slide" data-interval="5000" data-ride="carousel">
 									<ol class="carousel-indicators">{% for slide in slides %}
 										<li data-target="#slideshow" data-slide-to="{{ forloop.counter0 }}" class="{% if not forloop.counter0 %}
 											active
-										{% endif %}"></li>									
+										{% endif %}"></li>
 										{% endfor %}</ol>
-									
+
 									<div class="carousel-inner">
 										{% for slide in slides %}
 											<div class="{% if not  forloop.counter0 %}
@@ -114,15 +115,20 @@
                                             </a>
 										</div>
 										{% endfor %}
-										
-										
-										
+
+
+
 									</div>
 									<a class="carousel-control left" href="#slideshow" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span>
 									</a>
 									<a class="carousel-control right" href="#slideshow" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span>
 									</a>
 								</div>
+                                    {% endif %}
+								{% endblock %}
+
+                                {% block content %}
+
 								{% endblock content %}
 							</div>
 							<div class="col-md-4 col-md-pull-8 col-sm-12 col-xs-12">

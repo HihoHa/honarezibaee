@@ -82,6 +82,7 @@ class ArticleView(BaseView):
         # context['comments'] = ArticleComment.objects.filter(article = self.article).filter(is_verified=True)
         context['cookie_user'] = self.cookie_user
         context['recent_related'] = Article.get_by_category(self.article.category.all().first().get_root()).exclude(pk=self.article.pk).order_by('-created_at')[:6]
+        context['slides'] = None
         return context
 
     def render_to_response(self, context, **response_kwargs):
@@ -134,7 +135,12 @@ class ArticleListView(BaseView):
         context = super(ArticleListView, self).get_context_data(**kwargs)
         page = self.request.GET.get('page')
         context['page'] = page
-        articles = Article.non_archived_objects.all().order_by('-created_at')
+
+        tag = kwargs.get('tag')
+        if tag:
+            articles = Article.m_get_by_tag(tag).order_by('-created_at')
+        else:
+            articles = Article.non_archived_objects.all().order_by('-created_at')
         paginator = Paginator(articles, self.article_per_page)
         try:
             context['articles'] = paginator.page(page)
@@ -154,7 +160,7 @@ class ArticleListViewByCategory(BaseView):
         category_name = self.kwargs['category_name']
         page = self.request.GET.get('page')
         category = ArticleCategory.from_url_string(category_name)
-        articles = Article.get_by_category(category)
+        articles = Article.get_by_category(category).order_by('-created_at')
         context['category'] = category
         tag = self.request.GET.get('tag')
         if tag:
@@ -166,4 +172,5 @@ class ArticleListViewByCategory(BaseView):
             context['articles'] = paginator.page(paginator.num_pages)
         except PageNotAnInteger:
             context['articles'] = paginator.page(1)
+        context['slides'] = None
         return context
