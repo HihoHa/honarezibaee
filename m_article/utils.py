@@ -32,7 +32,7 @@ def localize(document, download_folder=MEDIA_ROOT, base_url='http://'):
         src = urljoin(base_url, link['src'])
         file_name = unique_name(src)
         request = requests.get(src, stream=True)
-        with open(os.path.join(MEDIA_ROOT,file_name), 'wb') as fd:
+        with open(os.path.join(MEDIA_ROOT, file_name), 'wb') as fd:
             for chunk in request.iter_content(chunk_size):
                 fd.write(chunk)
         link['src'] = urljoin(MEDIA_URL, file_name)
@@ -43,8 +43,17 @@ def edit_image_attr(document, url, alt):
     for img in soup('img'):
         img['alt'] = alt
         img['title'] = alt
-        img['class'] = 'image-responsive'
+        img['class'] = 'img-responsive center-block'
         if img.parent.name != u'a':
             link = img.wrap(soup.new_tag('a'))
             link['href'] = url
-    return soup.prettify()
+            link['class'] = 'text-center'
+    return soup.prettify(formatter=None)
+
+
+def with_new_line(content):
+    soup = BeautifulSoup(content)
+    for p in soup('p'):
+        if p.string == '\n':
+            p.string = br'&nbsp;'
+    return soup.prettify(formatter=None)  # to preserve &nbsp

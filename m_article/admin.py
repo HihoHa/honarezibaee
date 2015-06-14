@@ -6,7 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from m_article.models import Article, ArticleTag, ArticleCategory, SlideShow, ArticleUrlCategory
 from django_summernote.admin import SummernoteModelAdmin
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
-from m_article.utils import cleaner, localize, edit_image_attr
+from m_article.utils import cleaner, localize, edit_image_attr, with_new_line
 from multiupload.fields import MultiFileField
 from django.conf import settings
 import os
@@ -57,6 +57,7 @@ class ArticleAdminForm(forms.ModelForm):
         if clean:
             content = cleaner.clean_html(content)
         data['content'] = edit_image_attr(content, url=reverse('article_view', kwargs={'article_title': data['title'], 'category_name': data['category'].all().first().url_prefix()}), alt=data['title'])
+        data['content'] = with_new_line(data['content'])
         if not publish and not archive:
             raise forms.ValidationError("A non publishable article should be archived.")
         return data
@@ -97,16 +98,16 @@ class ArticleAdmin(ImageCroppingMixin, admin.ModelAdmin):  # , SummernoteModelAd
     form = ArticleAdminForm
     # change_form_tamplate = 'm_article/admin/change_form.html'
 
-    fields = ('title', 'short_description', 'content', 'clean_style', 'multifile',
+    fields = ('pk', 'title', 'short_description', 'content', 'clean_style', 'multifile',
               'tags', 'category',
               'created_at',
               'download_images',
               'cropping', 'video',
               'image', 'small_image', 'related_articles', 'publish',
               'archive', 'likes', 'dislikes', 'views', 'citations', 'do_not_publish_until')
-    readonly_fields = ('created_at', 'likes', 'dislikes', 'views', 'small_image', 'citations')
+    readonly_fields = ('pk', 'created_at', 'likes', 'dislikes', 'views', 'small_image', 'citations')
     list_filter = ('category', 'tags', 'publish', 'archive')
-    list_display = ('title', 'publish', 'archive', 'created_at', 'likes', 'dislikes', 'first_category')
+    list_display = ('title', 'publish', 'archive', 'created_at', 'likes', 'dislikes', 'first_category', 'views')
     ordering = ('-created_at',)
     list_editable = ('publish', 'archive')
     search_fields = ('title',)

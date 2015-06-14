@@ -136,9 +136,10 @@ class ArticleListView(BaseView):
         page = self.request.GET.get('page')
         context['page'] = page
 
-        tag = kwargs.get('tag')
+        tag = kwargs.get('tag_name')
         if tag:
             articles = Article.m_get_by_tag(tag).order_by('-created_at')
+            context['slides'] = None
         else:
             articles = Article.non_archived_objects.all().order_by('-created_at')
         paginator = Paginator(articles, self.article_per_page)
