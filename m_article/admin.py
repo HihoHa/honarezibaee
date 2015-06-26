@@ -3,7 +3,7 @@ from django.contrib import admin
 from treebeard.admin import TreeAdmin
 from treebeard.forms import movenodeform_factory
 from django.core.exceptions import ObjectDoesNotExist
-from m_article.models import Article, ArticleTag, ArticleCategory, SlideShow, ArticleUrlCategory
+from m_article.models import Article, ArticleTag, ArticleCategory, SlideShow, ArticleUrlCategory, AdvertisementBanner
 from django_summernote.admin import SummernoteModelAdmin
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 from m_article.utils import cleaner, localize, edit_image_attr, with_new_line
@@ -22,6 +22,7 @@ MEDIA_ROOT, MEDIA_URL = settings.MEDIA_ROOT, settings.MEDIA_URL
 class TagAdmin(TreeAdmin):
     form = movenodeform_factory(ArticleTag)
     list_filter = ('name',)
+    list_per_page = 400
 
 
 class CategoryAdmin(TreeAdmin):
@@ -163,3 +164,4 @@ admin.site.register(Article, ArticleAdmin)
 admin.site.register(ArticleCategory, CategoryAdmin)
 admin.site.register(SlideShow, SlideShowAdmin)
 admin.site.register(ArticleUrlCategory)
+admin.site.register(AdvertisementBanner)

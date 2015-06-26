@@ -28,7 +28,7 @@ class ListJSONViewMixin(object):
         return JsonResponse(result, safe=False)
 
     def arrange_json(self, instance):
-        """combines fields in self.json_fields and self.many_to_many_fields's and self.foreign_keys pks"""
+        """combines fields in self.json_fields with self.many_to_many_fields's and self.foreign_keys pks"""
         json = dict((field, getattr(instance, field)) for field in self.json_fields)
         for many_related_field in self.many_to_many_fields:
             related_list = getattr(instance, many_related_field)#this is a manager (job_instance.tags) but it can be none type

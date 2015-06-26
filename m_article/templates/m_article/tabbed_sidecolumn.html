@@ -9,11 +9,11 @@
 						<a href="/">
 						<img class="list-img" src="{% cropped_thumbnail item "small_cropping" %}"  alt="{{ item.title }}" width="100px" height="140px"></a>
 					<a href="{% url 'article_view' article_title=item.title category_name=article.first_category.url_prefix%}"><h4 class="item-heading">
-                        {{ article.title }}
+                        {{ item.title }}
 
-                        {% if article.short_description %}
+                        {% if item.short_description %}
                             <div>
-                    {{ article.short_description }}
+                    {{ item.short_description }}
                             </div>
                     {% endif %}
                     </h4></a><br />

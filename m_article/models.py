@@ -44,6 +44,11 @@ class ArticleCategory(NS_Node):
     is_multimedia = models.BooleanField(default=False)
     url_name = models.ForeignKey(ArticleUrlCategory, null=True, blank=True)
 
+    def clean(self):
+        for sib in self.get_siblings():
+            if sib.name == self.name:
+                raise ValidationError('Sibling categories should have different names: ' + self.name)
+
     def url_prefix(self):
         if self.get_root().url_name:
             return self.get_root().url_name.name
@@ -67,6 +72,21 @@ class ArticleCategory(NS_Node):
             return self.name + u'\u202E'
         else:
             return self.get_parent().complete_url() + '/' + self.name + u'\u202E'
+
+    def is_multimedia_type(self):
+        if self.is_root():
+            return self.is_multimedia
+        else:
+            return self.is_multimedia or self.get_parent().is_multimedia_type()
+
+    def multimedia_root(self):
+        if not self.is_multimedia_type():
+            raise Exception('this category is not multimedia type')
+        else:
+            if self.is_multimedia:
+                return self
+            else:
+                return self.get_parent().multimedia_root()
 
     @classmethod
     def from_url_string(cls, url):
@@ -158,11 +178,12 @@ class Article(models.Model):
         return Article.non_archived_objects.filter(category__in=category_tree).distinct()
 
     def get_suggestion_query(self):
-        category = self.first_category()
-        if category is None:
-            return None
-        suggestion_root = category.get_suggestion_root()
-        return Article.get_by_category(suggestion_root)
+        return Article.objects.all()
+        # category = self.first_category()
+        # if category is None:
+        #     return None
+        # suggestion_root = category.get_suggestion_root()
+        # return Article.get_by_category(suggestion_root)
 
     def update_small_image(self):
         """ikhtar!!! doesnt save the model!!!"""
@@ -220,3 +241,16 @@ class SlideShow(models.Model):
 
     def __unicode__(self):
         return self.article.__unicode__()
+
+
+class AdvertisementBanner(models.Model):
+    banner = models.ImageField()
+    link = models.URLField()
+    views = models.IntegerField(default=0)
+    clicks = models.IntegerField(default=0)
+
+    def __unicode__(self):
+        return str(self.link)
+
+    def redirect_link(self):
+        return reverse('ad_view', kwargs={'banner_pk': self.pk})

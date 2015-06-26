@@ -1,7 +1,7 @@
 {% for item in menuitems %}
   <li><a href="{% url view_name category_name=item.complete_url %}">{{item.name}}</a>
 
-  {% if item.get_children.all or item.menu_tags.all %}
+  {% if item.get_children.all and not item.is_multimedia %}
   <ul class="dropdown-menu">
   {% if item.get_children.all %}
     {% with  menuitems=item.children template_name="menu.html" view_name=view_name %}

@@ -38,6 +38,7 @@ def localize(document, download_folder=MEDIA_ROOT, base_url='http://'):
         link['src'] = urljoin(MEDIA_URL, file_name)
     return soup.prettify()
 
+
 def edit_image_attr(document, url, alt):
     soup = BeautifulSoup(document)
     for img in soup('img'):
@@ -48,6 +49,9 @@ def edit_image_attr(document, url, alt):
             link = img.wrap(soup.new_tag('a'))
             link['href'] = url
             link['class'] = 'text-center'
+        else:
+            link = img.parent
+            link['href'] = url
     return soup.prettify(formatter=None)
 
 

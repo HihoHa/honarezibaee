@@ -3,17 +3,25 @@
 {% load cropping %}
 {% load bootstrap3 %}
 {% block content %}
-    {% if category.is_multimedia %}
+    {% if category.is_multimedia_type %}
     <div class="container-fluid">
     <div class="row">
 
-    {% for m_category in category.children %}
+    {% for m_category in category.multimedia_root.children %}
         <nav class="col-md-4"><ul class="nav nav-tabs nav-justified">
-            <li role="presentation"><a href="{% url 'article_view_by_category' category_name=m_category.complete_url%}">
+            <li role="presentation"
+                    {% if m_category.pk == category.pk %}
+                    class="active"
+                    {% endif %} 
+                    ><a href="{% url 'article_view_by_category' category_name=m_category.complete_url%}">
             {{ m_category.name }}</a></li></ul>
         <ul class="nav nav-tabs nav-justified ">
             {% for child in m_category.children %}
-            <li role="presentation"><a href="#">{{ child.name }}</a></li>
+            <li role="presentation"
+                    {% if child.pk == category.pk %}
+                    class="active"
+                    {% endif %}
+                    ><a href="{% url 'article_view_by_category' category_name=child.complete_url%}">{{ child.name }}</a></li>
             {% endfor %}
 
         </ul>
@@ -33,12 +41,14 @@
                     <h4 class="article-heading">
                     {{ article.title }}
 
-                        {% if article.short_description %}
+
+                    </h4>
+                    {% if article.short_description %}
                             <div>
                     {{ article.short_description }}
                             </div>
                     {% endif %}
-                    </h4></a>
+                    </a>
                     <span class="clearfix"></span>
                 </div>
 

@@ -1,9 +1,9 @@
 from m_article.utils import get_article_from_url, get_tag_from_url
 from django.shortcuts import render_to_response, render, redirect
-from m_article.models import Article, ArticleTag, ArticleCategory, SlideShow
+from m_article.models import Article, ArticleTag, ArticleCategory, SlideShow, AdvertisementBanner
 from django.views.generic import View, DetailView
 from django.views.generic.base import TemplateView
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import CommentForm
 from django.core.urlresolvers import reverse
@@ -28,13 +28,25 @@ class BaseView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(BaseView, self).get_context_data(**kwargs)
         context['menuitems'] = ArticleCategory.get_root_nodes().order_by('ordering')
-        new_articles = Article.non_archived_objects.filter(created_at__lte=(datetime.utcnow() - timedelta(days=15)))
+        new_articles = Article.non_archived_objects.filter(created_at__gte=(datetime.utcnow() - timedelta(days=15)))
         context['hot'] = new_articles.order_by('-views')[:5]
         context['best'] = new_articles.order_by('-likes')[:5]
         context['view_name'] = self.view_name
         context['slides'] = SlideShow.objects.all()
         context['multimedia_categories'] = ArticleCategory.objects.filter(is_multimedia=True)
+        context['banners'] = AdvertisementBanner.objects.all()
+        for banner in context['banners']:
+            banner.views += 1
+            banner.save()
+
         return context
+
+
+def banner_redirect(request, *args, **kwargs):
+    banner = AdvertisementBanner.objects.get(pk=kwargs['banner_pk'])
+    banner.clicks += 1
+    banner.save()
+    return HttpResponseRedirect(banner.link)
 
 
 class VoteForm(forms.ModelForm):
@@ -138,7 +150,7 @@ class ArticleListView(BaseView):
 
         tag = kwargs.get('tag_name')
         if tag:
-            articles = Article.m_get_by_tag(tag).order_by('-created_at')
+            articles = Article.m_get_by_tag(tag).distinct().order_by('-created_at')
             context['slides'] = None
         else:
             articles = Article.non_archived_objects.all().order_by('-created_at')

@@ -41,6 +41,7 @@
 		<link rel="stylesheet" href="{% static "css/custom.min.css" %}">
 		<link rel="stylesheet" href="{% static "css/navbar.css" %}">
 		<link rel="stylesheet" href="{% static "css/social-share-kit.css" %}">
+        <link rel="stylesheet" href="{% static "css/banner.css" %}">
 	</head>
 	<body>
 		<div class="container-fluid status-bar" ></div>
@@ -78,9 +79,13 @@
 							</div>
 							</form>
 						</section>
-						<section>
-							{% include "m_article/rightsidecolumn.html" with listname="Talks" itemlist=talks %}
-						</section>
+
+                        <section>
+                            {% for banner in banners %}
+                                <a href="{{ banner.redirect_link }}"><img src="{{ banner.banner.url }}" class="banner img-responsive"/></a>
+                            {% endfor %}
+
+                        </section>
 					</div>
 					<div class="col-md-10 col-md-pull-2 col-sm-9 col-sm-pull-3 col-xs-12">
 						<div class="row">

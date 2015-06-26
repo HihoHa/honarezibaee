@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
+from m_article.views import banner_redirect
 
 urlpatterns = patterns('',
     # Examples:
@@ -17,6 +18,7 @@ urlpatterns = patterns('',
     url(r'^jobs/', include('jobs.urls')),
     url(r'^api/', include('apis.urls')),
     url(r'^ckeditor/', include('ckeditor.urls')),
+    url(r'^banner/(?P<banner_pk>\d+)', banner_redirect, name="ad_view"),
 )
 
 
