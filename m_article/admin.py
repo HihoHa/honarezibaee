@@ -35,6 +35,8 @@ class ArticleAdminForm(forms.ModelForm):
     download_images = forms.BooleanField(required=False)
     clean_style = forms.BooleanField(required=False)
     content = forms.CharField(widget=CKEditorWidget())
+    title = forms.CharField(widget=forms.TextInput(attrs={'style': 'direction: rtl;'}))
+    short_description = forms.CharField(widget=forms.Textarea(attrs={'style': 'direction: rtl;'}))
     # update_related_articles = forms.BooleanField(required=False)
 
     class Meta:
