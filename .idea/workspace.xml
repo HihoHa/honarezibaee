@@ -281,19 +281,9 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/static/ckeditor/skins/moono/images/refresh.png" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/static/ckeditor/skins/moono/readme.md" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/static/ckeditor/styles.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/m_article/admin.py" afterPath="$PROJECT_DIR$/m_article/admin.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../rahshahr/spl/viewer/static/js/app.js" afterPath="$PROJECT_DIR$/../../rahshahr/spl/viewer/static/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/m_article/templates/m_article/article.html" afterPath="$PROJECT_DIR$/m_article/templates/m_article/article.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/base.html" afterPath="$PROJECT_DIR$/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/beauty.iml" afterPath="$PROJECT_DIR$/.idea/beauty.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../rahshahr/spl/viewer/senssor/templates/senssor/graph.html" afterPath="$PROJECT_DIR$/../../rahshahr/spl/viewer/senssor/templates/senssor/graph.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jobs/models.py" afterPath="$PROJECT_DIR$/jobs/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/m_article/models.py" afterPath="$PROJECT_DIR$/m_article/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/beauty/settings.py" afterPath="$PROJECT_DIR$/beauty/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/m_article/templates/m_article/tabbed_sidecolumn.html" afterPath="$PROJECT_DIR$/m_article/templates/m_article/tabbed_sidecolumn.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/m_article/views.py" afterPath="$PROJECT_DIR$/m_article/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="beauty.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -361,10 +351,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admin.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/m_article/admin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4818653" vertical-offset="1281" max-vertical-offset="3920">
+            <state vertical-scroll-proportion="-9.964286" vertical-offset="1281" max-vertical-offset="3920">
               <caret line="78" column="12" selection-start-line="78" selection-start-column="12" selection-end-line="78" selection-end-column="12" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
@@ -415,11 +405,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/m_article/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-77.10714" vertical-offset="2601" max-vertical-offset="5180">
-              <caret line="254" column="59" selection-start-line="254" selection-start-column="59" selection-end-line="254" selection-end-column="59" />
+            <state vertical-scroll-proportion="0.4818653" vertical-offset="2061" max-vertical-offset="5180">
+              <caret line="133" column="43" selection-start-line="133" selection-start-column="43" selection-end-line="133" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -480,8 +470,8 @@
         <option value="$PROJECT_DIR$/m_article/templates/m_article/article.html" />
         <option value="$PROJECT_DIR$/m_article/views.py" />
         <option value="$PROJECT_DIR$/templates/base.html" />
-        <option value="$PROJECT_DIR$/m_article/models.py" />
         <option value="$PROJECT_DIR$/m_article/admin.py" />
+        <option value="$PROJECT_DIR$/m_article/models.py" />
       </list>
     </option>
   </component>
@@ -1293,21 +1283,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/m_article/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-77.10714" vertical-offset="2601" max-vertical-offset="5180">
-          <caret line="254" column="59" selection-start-line="254" selection-start-column="59" selection-end-line="254" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/m_article/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4818653" vertical-offset="1281" max-vertical-offset="3920">
+        <state vertical-scroll-proportion="-9.964286" vertical-offset="1281" max-vertical-offset="3920">
           <caret line="78" column="12" selection-start-line="78" selection-start-column="12" selection-end-line="78" selection-end-column="12" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/m_article/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4818653" vertical-offset="2061" max-vertical-offset="5180">
+          <caret line="133" column="43" selection-start-line="133" selection-start-column="43" selection-end-line="133" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>

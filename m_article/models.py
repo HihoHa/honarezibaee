@@ -131,7 +131,7 @@ class ArticleDetailManager(models.Manager):
 
 @m_view(attribute_names=['content'], mobile_names=['m_content'], refiner_classes=[MobileViewRefiner])
 class Article(models.Model):
-    title = models.CharField(max_length=200, unique=True)  # , unique_for_month=True)
+    title = models.CharField(max_length=200)  # , unique_for_month=True)
     content = models.TextField()
     short_description = models.TextField(null=True, blank=True)
     tags = models.ManyToManyField(ArticleTag, null=True, blank=True)
