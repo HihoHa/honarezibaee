@@ -144,7 +144,7 @@ DJANGO_WYSIWYG_FLAVOR = "ckeditor"
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
-        'height': 600,
+        'height': 450,
         'width': '100%',
         'language': 'fa',
     },

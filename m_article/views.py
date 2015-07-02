@@ -29,12 +29,12 @@ class BaseView(TemplateView):
         context = super(BaseView, self).get_context_data(**kwargs)
         context['menuitems'] = ArticleCategory.get_root_nodes().order_by('ordering')
         new_articles = Article.non_archived_objects.filter(created_at__gte=(datetime.utcnow() - timedelta(days=15)))
-        context['hot'] = new_articles.order_by('-views')[:5]
-        context['best'] = new_articles.order_by('-likes')[:5]
+        context['hot'] = new_articles.order_by('-views')[:7]
+        context['best'] = new_articles.order_by('-likes')[:7]
         context['view_name'] = self.view_name
         context['slides'] = SlideShow.objects.all()
         context['multimedia_categories'] = ArticleCategory.objects.filter(is_multimedia=True)
-        context['banners'] = AdvertisementBanner.objects.all()
+        context['banners'] = AdvertisementBanner.publishable.all().order_by('?')
         for banner in context['banners']:
             banner.views += 1
             banner.save()
@@ -141,7 +141,7 @@ class ArticleView(BaseView):
 
 class ArticleListView(BaseView):
     template_name = 'm_article/article_list.html'
-    article_per_page = 3
+    article_per_page = 15
 
     def get_context_data(self, **kwargs):
         context = super(ArticleListView, self).get_context_data(**kwargs)
@@ -166,7 +166,7 @@ class ArticleListView(BaseView):
 
 class ArticleListViewByCategory(BaseView):
     template_name = "m_article/article_list.html"
-    article_per_page = 3
+    article_per_page = 15
 
     def get_context_data(self, **kwargs):
         context = super(ArticleListViewByCategory, self).get_context_data(**kwargs)

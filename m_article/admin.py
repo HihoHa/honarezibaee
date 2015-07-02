@@ -15,6 +15,7 @@ from datetime import datetime, timedelta
 from image_cropping import ImageCroppingMixin
 from ckeditor.widgets import CKEditorWidget
 from django.core.urlresolvers import reverse
+from django.contrib.admin.widgets import FilteredSelectMultiple
 
 MEDIA_ROOT, MEDIA_URL = settings.MEDIA_ROOT, settings.MEDIA_URL
 
@@ -31,12 +32,27 @@ class CategoryAdmin(TreeAdmin):
 
 
 class ArticleAdminForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(ArticleAdminForm, self).__init__(*args, **kwargs)
+        if self.instance.id:
+            queryset = self.instance.get_suggestion_query()
+        else:
+            queryset = Article.objects.all()
+
+        self.fields['related_articles'] = forms.ModelMultipleChoiceField(
+            queryset=queryset, widget=FilteredSelectMultiple('Related Articles', False, attrs={'style': 'direction: rtl;'}))
+
     multifile = MultiFileField(required=False, max_file_size=5*1024*1024)
     download_images = forms.BooleanField(required=False)
     clean_style = forms.BooleanField(required=False)
     content = forms.CharField(widget=CKEditorWidget())
-    title = forms.CharField(widget=forms.TextInput(attrs={'style': 'direction: rtl;'}))
-    short_description = forms.CharField(widget=forms.Textarea(attrs={'style': 'direction: rtl;'}))
+    title = forms.CharField(widget=forms.TextInput(attrs={'style': 'direction: rtl; width: 600px;'}))
+    short_description = forms.CharField(required=False, widget=forms.Textarea(attrs={'style': 'direction: rtl; width: 600px;'}))
+    category = forms.ModelMultipleChoiceField(queryset=ArticleCategory.objects.all(), widget=FilteredSelectMultiple("Category", False, attrs={'style': 'direction: rtl;'}))
+    tag = forms.ModelMultipleChoiceField(queryset=ArticleTag.objects.all(), widget=FilteredSelectMultiple("Category", False, attrs={'style': 'direction: rtl;'}))
+
+
     # update_related_articles = forms.BooleanField(required=False)
 
     class Meta:
@@ -59,7 +75,8 @@ class ArticleAdminForm(forms.ModelForm):
         content = data.get('content')
         if clean:
             content = cleaner.clean_html(content)
-        data['content'] = edit_image_attr(content, url=reverse('article_view', kwargs={'article_title': data['title'], 'category_name': data['category'].all().first().url_prefix()}), alt=data['title'])
+        if 'title' in data and 'category' in data:
+            data['content'] = edit_image_attr(content, url=reverse('article_view', kwargs={'article_title': data['title'], 'category_name': data['category'].all().first().url_prefix()}), alt=data['title'])
         data['content'] = with_new_line(data['content'])
         if not publish and not archive:
             raise forms.ValidationError("A non publishable article should be archived.")
@@ -115,7 +132,7 @@ class ArticleAdmin(ImageCroppingMixin, admin.ModelAdmin):  # , SummernoteModelAd
     list_editable = ('publish', 'archive')
     search_fields = ('title',)
     filter_horizontal = ('tags', 'category', 'related_articles')
-    save_as = True
+    save_as = False
 
     def get_search_results(self, request, queryset, search_term):  # for search on articles page
         queryset, use_distinct = super(ArticleAdmin, self).get_search_results(request, queryset, search_term)
@@ -141,16 +158,21 @@ class SlideShowAdmin(SummernoteModelAdmin):
     form = SlideShowForm
 
 
+class BannerAdmin(admin.ModelAdmin):
+    list_display = ('name', 'start_time', 'end_time', 'views', 'clicks')
+
 from django.contrib.flatpages.models import FlatPage
  
 # Note: we are renaming the original Admin and Form as we import them!
 from django.contrib.flatpages.admin import FlatPageAdmin as FlatPageAdminOld
 from django.contrib.flatpages.admin import FlatpageForm as FlatpageFormOld
 
+
 class FlatpageForm(FlatpageFormOld):
     content = forms.CharField(widget=CKEditorWidget())
+
     class Meta:
-        model = FlatPage # this is not automatically inherited from FlatpageFormOld
+        model = FlatPage  # this is not automatically inherited from FlatpageFormOld
  
  
 class FlatPageAdmin(FlatPageAdminOld):
@@ -166,4 +188,4 @@ admin.site.register(Article, ArticleAdmin)
 admin.site.register(ArticleCategory, CategoryAdmin)
 admin.site.register(SlideShow, SlideShowAdmin)
 admin.site.register(ArticleUrlCategory)
-admin.site.register(AdvertisementBanner)
+admin.site.register(AdvertisementBanner, BannerAdmin)

@@ -33,7 +33,7 @@ class JobCategory(NS_Node):
 #@m_view(attribute_name='title', mobile_name='word_list', refiner_class=ListFromStringRefiner)
 @m_view(attribute_names=['description', 'address','title'], mobile_names = ['m_description', 'm_address', 'word_list'], refiner_classes=[MobileViewRefiner, MobileViewRefiner, ListFromStringRefiner])
 class Job(models.Model):
-    title = models.CharField(max_length=1000, unique=True)
+    title = models.CharField(max_length=1000)
     description = models.TextField()
     address = models.TextField()
     email_address = models.EmailField(null=True, blank=True)

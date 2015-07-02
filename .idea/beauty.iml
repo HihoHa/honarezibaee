@@ -17,6 +17,7 @@
     <orderEntry type="module" module-name="viewer" />
     <orderEntry type="module" module-name="travel_sensors" />
     <orderEntry type="module" module-name="viewer" />
+    <orderEntry type="module" module-name="gcm" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />

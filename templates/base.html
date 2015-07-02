@@ -82,7 +82,7 @@
 
                         <section>
                             {% for banner in banners %}
-                                <a href="{{ banner.redirect_link }}"><img src="{{ banner.banner.url }}" class="banner img-responsive"/></a>
+                                <a href="{{ banner.redirect_link }}"><img src="{{ banner.banner.url }}" class="banner img-responsive" alt="{{ banner.name }}"/></a>
                             {% endfor %}
 
                         </section>

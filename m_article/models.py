@@ -25,7 +25,10 @@ class ArticleTag(NS_Node):
     node_order_by = ['name']
 
     def __unicode__(self):
-        return self.name
+        if self.is_root():
+            return self.name
+        else:
+            return self.get_parent().__unicode__() + ' |> ' + self.name
 
 
 class ArticleUrlCategory(models.Model):
@@ -128,7 +131,7 @@ class ArticleDetailManager(models.Manager):
 
 @m_view(attribute_names=['content'], mobile_names=['m_content'], refiner_classes=[MobileViewRefiner])
 class Article(models.Model):
-    title = models.CharField(max_length=200)  # , unique_for_month=True)
+    title = models.CharField(max_length=200, unique=True)  # , unique_for_month=True)
     content = models.TextField()
     short_description = models.TextField(null=True, blank=True)
     tags = models.ManyToManyField(ArticleTag, null=True, blank=True)
@@ -178,12 +181,12 @@ class Article(models.Model):
         return Article.non_archived_objects.filter(category__in=category_tree).distinct()
 
     def get_suggestion_query(self):
-        return Article.objects.all()
-        # category = self.first_category()
-        # if category is None:
-        #     return None
-        # suggestion_root = category.get_suggestion_root()
-        # return Article.get_by_category(suggestion_root)
+        # return Article.objects.all()
+        category = self.first_category()
+        if category is None:
+            return None
+        suggestion_root = category.get_suggestion_root()
+        return Article.get_by_category(suggestion_root)
 
     def update_small_image(self):
         """ikhtar!!! doesnt save the model!!!"""
@@ -243,11 +246,22 @@ class SlideShow(models.Model):
         return self.article.__unicode__()
 
 
+class AdBannerManager(models.Manager):
+    def get_queryset(self):
+        return super(AdBannerManager, self).get_queryset().filter(publish=True)
+
+
 class AdvertisementBanner(models.Model):
+    name = models.CharField(max_length=200, default='banner')
+    start_time = models.DateTimeField(null=True, blank=True)
+    end_time = models.DateTimeField(null=True, blank=True)
     banner = models.ImageField()
     link = models.URLField()
     views = models.IntegerField(default=0)
     clicks = models.IntegerField(default=0)
+    publish = models.BooleanField(default=False)
+    objects = models.Manager()
+    publishable = AdBannerManager()
 
     def __unicode__(self):
         return str(self.link)
