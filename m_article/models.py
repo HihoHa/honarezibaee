@@ -25,10 +25,7 @@ class ArticleTag(NS_Node):
     node_order_by = ['name']
 
     def __unicode__(self):
-        if self.is_root():
-            return self.name
-        else:
-            return self.get_parent().__unicode__() + ' |> ' + self.name
+        return self.name
 
 
 class ArticleUrlCategory(models.Model):

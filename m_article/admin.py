@@ -40,7 +40,7 @@ class ArticleAdminForm(forms.ModelForm):
         else:
             queryset = Article.objects.all()
 
-        self.fields['related_articles'] = forms.ModelMultipleChoiceField(
+        self.fields['related_articles'] = forms.ModelMultipleChoiceField(required=False,
             queryset=queryset, widget=FilteredSelectMultiple('Related Articles', False, attrs={'style': 'direction: rtl;'}))
 
     multifile = MultiFileField(required=False, max_file_size=5*1024*1024)
