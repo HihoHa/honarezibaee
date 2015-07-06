@@ -5,3 +5,4 @@ migrations/
 conf.py
 images/*
 !images/no-picture.png
+.idea/
