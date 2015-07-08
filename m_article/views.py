@@ -33,9 +33,9 @@ class BaseView(TemplateView):
         context['best'] = new_articles.order_by('-likes')[:7]
         multimedia_categories = ArticleCategory.objects.filter(is_multimedia=True)
         context['new_multimedia_non_video'] = Article.publishable_objects.filter(
-                                                category__in=multimedia_categories).filter(video=None)
+            category__in=list(multimedia_categories)).filter(video=None).order_by('-views')[:7]
         context['new_viedeos'] = Article.publishable_objects.filter(
-                                                category__in=multimedia_categories).exclude(video=None)
+            category__in=list(multimedia_categories)).exclude(video=None).order_by('-views')[:7]
         context['view_name'] = self.view_name
         context['slides'] = SlideShow.objects.all()
         context['multimedia_categories'] = multimedia_categories
