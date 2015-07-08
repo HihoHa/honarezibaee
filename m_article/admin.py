@@ -16,6 +16,7 @@ from image_cropping import ImageCroppingMixin
 from ckeditor.widgets import CKEditorWidget
 from django.core.urlresolvers import reverse
 from django.contrib.admin.widgets import FilteredSelectMultiple
+import sys
 
 MEDIA_ROOT, MEDIA_URL = settings.MEDIA_ROOT, settings.MEDIA_URL
 
@@ -31,9 +32,21 @@ class CategoryAdmin(TreeAdmin):
     list_filter = ('name',)
 
 
+import logging
+log = logging.getLogger(__name__)
+# convert the errors to text
+from django.utils.encoding import force_text
+
+
 class ArticleAdminForm(forms.ModelForm):
 
+    def is_valid(self):
+
+        print >>sys.stderr, '********self.errors: ' + force_text(self.errors)
+        return super(ArticleAdminForm, self).is_valid()
+
     def __init__(self, *args, **kwargs):
+        print >>sys.stderr, 'Goodbye, cruel world!'
         super(ArticleAdminForm, self).__init__(*args, **kwargs)
         if self.instance.id:
             queryset = self.instance.get_suggestion_query()
@@ -50,14 +63,14 @@ class ArticleAdminForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={'style': 'direction: rtl; width: 600px;'}))
     short_description = forms.CharField(required=False, widget=forms.Textarea(attrs={'style': 'direction: rtl; width: 600px;'}))
     category = forms.ModelMultipleChoiceField(queryset=ArticleCategory.objects.all(), widget=FilteredSelectMultiple("Category", False, attrs={'style': 'direction: rtl;'}))
-    tag = forms.ModelMultipleChoiceField(queryset=ArticleTag.objects.all(), widget=FilteredSelectMultiple("Category", False, attrs={'style': 'direction: rtl;'}))
+    tag = forms.ModelMultipleChoiceField(required=False, queryset=ArticleTag.objects.all(), widget=FilteredSelectMultiple("Category", False, attrs={'style': 'direction: rtl;'}))
 
 
     # update_related_articles = forms.BooleanField(required=False)
 
     class Meta:
         model = Article
-        fields = '__all__'
+
 
     def clean_video(self):
         video = self.cleaned_data['video']
@@ -78,7 +91,8 @@ class ArticleAdminForm(forms.ModelForm):
             content = cleaner.clean_html(content)
         if 'title' in data and 'category' in data:
             data['content'] = edit_image_attr(content, url=reverse('article_view', kwargs={'article_title': data['title'], 'category_name': data['category'].all().first().url_prefix()}), alt=data['title'])
-        data['content'] = with_new_line(data['content'])
+        if 'content' in data:
+            data['content'] = with_new_line(data['content'])
         if not publish and not archive:
             raise forms.ValidationError("A non publishable article should be archived.")
         return data
@@ -119,14 +133,14 @@ class ArticleAdmin(ImageCroppingMixin, admin.ModelAdmin):  # , SummernoteModelAd
     form = ArticleAdminForm
     # change_form_tamplate = 'm_article/admin/change_form.html'
 
-    fields = ('pk', 'title', 'short_description', 'content', 'clean_style', 'multifile',
+    fields = ( 'title', 'short_description', 'content', 'clean_style', 'multifile',
               'tags', 'category',
               'created_at',
               'download_images',
               'cropping', 'video',
               'image', 'small_image', 'related_articles', 'publish',
               'archive', 'likes', 'dislikes', 'views', 'citations', 'do_not_publish_until')
-    readonly_fields = ('pk', 'created_at', 'likes', 'dislikes', 'views', 'small_image', 'citations')
+    readonly_fields = ('created_at', 'likes', 'dislikes', 'views', 'small_image', 'citations')
     list_filter = ('category', 'tags', 'publish', 'archive')
     list_display = ('title', 'publish', 'archive', 'created_at', 'likes', 'dislikes', 'first_category', 'views')
     ordering = ('-created_at',)

@@ -44,10 +44,13 @@ class ArticleCategory(NS_Node):
     is_multimedia = models.BooleanField(default=False)
     url_name = models.ForeignKey(ArticleUrlCategory, null=True, blank=True)
 
-    def clean(self):
-        for sib in self.get_siblings():
-            if sib.name == self.name:
-                raise ValidationError('Sibling categories should have different names: ' + self.name)
+    # def clean(self):
+    #     try:
+    #         for sib in self.get_siblings():
+    #             if sib.name == self.name:
+    #                 raise ValidationError('Sibling categories should have different names: ' + self.name)
+    #     except ValidationError as e:
+    #         raise e
 
     def url_prefix(self):
         if self.get_root().url_name:

@@ -53,6 +53,7 @@ INSTALLED_APPS = (
     'ckeditor',
     'django_wysiwyg',
     'django.contrib.flatpages',
+     'django_extensions',
 )
 
 MIDDLEWARE_CLASSES = (
