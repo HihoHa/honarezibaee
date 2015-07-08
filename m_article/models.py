@@ -162,10 +162,6 @@ class Article(models.Model):
             all_tags.append(tag)
         return list(set(all_tags))
 
-    @property
-    def description_or_title(self):
-        return self.short_description or self.title
-
     def first_category(self):
         return self.category.all().first()
 
@@ -205,7 +201,7 @@ class Article(models.Model):
         return self.title
 
     def update_related_articles(self):
-        how_many = 5 - self.related_articles.count()
+        how_many = 5 - self._num_of_related_articles
         if how_many > 0 and self.get_suggestion_query() is not None:
             for article in self.get_suggestion_query().filter(
                     created_at__gte=self.created_at - timedelta(days=45)).filter(
@@ -229,6 +225,8 @@ def my_handler(sender, instance, action, reverse, pk_set, **kwargs):
 def update_handler(sender, instance, action, *args, **kwargs):
     if action == 'post_clear':
         instance.update_related_articles()
+    if action == 'pre_clear':
+        instance._num_of_related_articles = len(instance.category.all())
 
 
 @receiver(post_save, sender=Article, weak=False, dispatch_uid="post_save_update")
