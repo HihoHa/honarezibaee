@@ -133,7 +133,7 @@ class ArticleAdmin(ImageCroppingMixin, admin.ModelAdmin):  # , SummernoteModelAd
     form = ArticleAdminForm
     # change_form_tamplate = 'm_article/admin/change_form.html'
 
-    fields = ( 'title', 'short_description', 'content', 'clean_style', 'multifile',
+    fields = ('pk', 'title', 'short_description', 'content', 'clean_style', 'multifile',
               'tags', 'category',
               'created_at',
               'download_images',
