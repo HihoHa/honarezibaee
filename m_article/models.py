@@ -137,7 +137,7 @@ class Article(models.Model):
     tags = models.ManyToManyField(ArticleTag, null=True, blank=True)
     category = models.ManyToManyField(ArticleCategory)
     created_at = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(upload_to='article_avatar/', default='no-picture.png')
+    image = models.ImageField(upload_to='article_avatar/', default='no-picture.jpg')
     cropping = ImageRatioField('image', '500x360')
     small_cropping = ImageRatioField('image', '150x100')
     small_image = models.ImageField(upload_to='article_avatar/', null=True, blank=True)
