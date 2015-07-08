@@ -70,6 +70,7 @@ class ArticleAdminForm(forms.ModelForm):
 
     class Meta:
         model = Article
+        fields = '__all__'
 
 
     def clean_video(self):
