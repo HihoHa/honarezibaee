@@ -141,7 +141,7 @@ class ArticleAdmin(ImageCroppingMixin, admin.ModelAdmin):  # , SummernoteModelAd
               'image', 'small_image', 'related_articles', 'publish',
               'archive', 'likes', 'dislikes', 'views', 'citations', 'do_not_publish_until')
     readonly_fields = ('pk', 'created_at', 'likes', 'dislikes', 'views', 'small_image', 'citations')
-    list_filter = ('category', 'tags', 'publish', 'archive')
+    list_filter = ('category', 'publish', 'archive', 'tags')
     list_display = ('title', 'publish', 'archive', 'created_at', 'likes', 'dislikes', 'first_category', 'views')
     ordering = ('-created_at',)
     list_editable = ('publish', 'archive')

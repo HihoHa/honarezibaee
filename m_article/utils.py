@@ -14,10 +14,12 @@ tag_name_regex = re.compile(ur'(?<=article/tag/)[^//]*', re.UNICODE)
 def get_article_from_url(url):
     return article_name_regex.search(url).group()
 
+
 def get_tag_from_url(url):
     return tag_name_regex.search(url).group()
 
 cleaner = Cleaner(style=True, page_structure=True, remove_tags=['a'], scripts=True)
+
 
 def unique_name(link):
     i = link.rfind('.')
