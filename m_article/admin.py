@@ -38,6 +38,19 @@ log = logging.getLogger(__name__)
 from django.utils.encoding import force_text
 
 
+class ArticleChangeForm(forms.ModelForm):
+    def clean(self):
+        data = super(ArticleChangeForm, self).clean()
+        archive = data.get('archive')
+        publish = data.get('publish')
+        if not publish and not archive:
+            raise forms.ValidationError("A non publishable article should be archived.")
+
+    class Meta:
+        model = Article
+        fields = ('archive', 'publish',)
+
+
 class ArticleAdminForm(forms.ModelForm):
 
     def is_valid(self):
@@ -160,7 +173,7 @@ class ArticleAdmin(ImageCroppingMixin, admin.ModelAdmin):  # , SummernoteModelAd
         return queryset, use_distinct
 
     def get_changelist_form(self, request, **kwargs):
-        return ArticleAdminForm
+        return ArticleChangeForm
 
 
 class SlideShowForm(forms.ModelForm):
