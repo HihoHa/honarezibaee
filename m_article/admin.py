@@ -82,7 +82,7 @@ class ArticleAdminForm(forms.ModelForm):
     def clean(self):
         data = super(ArticleAdminForm, self).clean()
         if data.get('download_images'):
-            data['content'] = localize(data['content'])
+            data['content'] = localize(data.get('content', ''))
         publish = data.get('publish')
         archive = data.get('archive')
         clean = data.get('clean_style')
