@@ -46,7 +46,6 @@ class ArticleAdminForm(forms.ModelForm):
         return super(ArticleAdminForm, self).is_valid()
 
     def __init__(self, *args, **kwargs):
-        print >>sys.stderr, 'Goodbye, cruel world!'
         super(ArticleAdminForm, self).__init__(*args, **kwargs)
         if self.instance.id:
             queryset = self.instance.get_suggestion_query()
@@ -63,7 +62,7 @@ class ArticleAdminForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={'style': 'direction: rtl; width: 600px;'}))
     short_description = forms.CharField(required=False, widget=forms.Textarea(attrs={'style': 'direction: rtl; width: 600px;'}))
     category = forms.ModelMultipleChoiceField(queryset=ArticleCategory.objects.all(), widget=FilteredSelectMultiple("Category", False, attrs={'style': 'direction: rtl;'}))
-    tag = forms.ModelMultipleChoiceField(required=False, queryset=ArticleTag.objects.all(), widget=FilteredSelectMultiple("Category", False, attrs={'style': 'direction: rtl;'}))
+    tags = forms.ModelMultipleChoiceField(required=False, queryset=ArticleTag.objects.all(), widget=FilteredSelectMultiple("Category", False, attrs={'style': 'direction: rtl;'}))
 
 
     # update_related_articles = forms.BooleanField(required=False)
@@ -141,7 +140,7 @@ class ArticleAdmin(ImageCroppingMixin, admin.ModelAdmin):  # , SummernoteModelAd
               'cropping', 'video',
               'image', 'small_image', 'related_articles', 'publish',
               'archive', 'likes', 'dislikes', 'views', 'citations', 'do_not_publish_until')
-    readonly_fields = ('created_at', 'likes', 'dislikes', 'views', 'small_image', 'citations')
+    readonly_fields = ('pk', 'created_at', 'likes', 'dislikes', 'views', 'small_image', 'citations')
     list_filter = ('category', 'tags', 'publish', 'archive')
     list_display = ('title', 'publish', 'archive', 'created_at', 'likes', 'dislikes', 'first_category', 'views')
     ordering = ('-created_at',)
