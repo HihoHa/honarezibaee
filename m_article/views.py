@@ -21,31 +21,6 @@ from datetime import datetime, timedelta
 logger = logging.getLogger('django')
 
 
-class BaseView(TemplateView):
-    template_name = 'base.html'
-    view_name = 'article_view_by_category'
-
-    def get_context_data(self, **kwargs):
-        context = super(BaseView, self).get_context_data(**kwargs)
-        context['menuitems'] = ArticleCategory.get_root_nodes().order_by('ordering')
-        new_articles = Article.non_archived_objects.filter(created_at__gte=(datetime.utcnow() - timedelta(days=15)))
-        context['hot'] = new_articles.order_by('-views')[:7]
-        context['best'] = new_articles.order_by('-likes')[:7]
-        multimedia_categories = ArticleCategory.objects.filter(is_multimedia=True)
-        context['new_multimedia_non_video'] = Article.publishable_objects.filter(
-            category__in=list(multimedia_categories)).filter(video=None).order_by('-views')[:7]
-        context['new_viedeos'] = Article.publishable_objects.filter(
-            category__in=list(multimedia_categories)).exclude(video=None).order_by('-views')[:7]
-        context['view_name'] = self.view_name
-        context['slides'] = SlideShow.objects.all()
-        context['multimedia_categories'] = multimedia_categories
-        context['banners'] = AdvertisementBanner.publishable.all().order_by('?')
-        for banner in context['banners']:
-            banner.views += 1
-            banner.save()
-        return context
-
-
 def banner_redirect(request, *args, **kwargs):
     banner = AdvertisementBanner.objects.get(pk=kwargs['banner_pk'])
     banner.clicks += 1
@@ -60,7 +35,7 @@ class VoteForm(forms.ModelForm):
         # exclude = ['ip', 'date', 'user', 'article']: Does nothing. exclude means these fields exclude from models validation (.clean() method).
 
 
-class ArticleView(BaseView):
+class ArticleView(TemplateView):
     template_name = 'm_article/article.html'
     set_cookie = False
 
@@ -98,7 +73,6 @@ class ArticleView(BaseView):
         # context['comments'] = ArticleComment.objects.filter(article = self.article).filter(is_verified=True)
         context['cookie_user'] = self.cookie_user
         context['recent_related'] = Article.get_by_category(self.article.category.all().first().get_root()).exclude(pk=self.article.pk).order_by('-created_at')[:6]
-        context['slides'] = None
         return context
 
     def render_to_response(self, context, **response_kwargs):
@@ -143,7 +117,7 @@ class ArticleView(BaseView):
         #     return redirect('article_view', article_title=article_title)
 
 
-class ArticleListView(BaseView):
+class ArticleListView(TemplateView):
     template_name = 'm_article/article_list.html'
     article_per_page = 15
 
@@ -155,8 +129,8 @@ class ArticleListView(BaseView):
         tag = kwargs.get('tag_name')
         if tag:
             articles = Article.m_get_by_tag(tag).distinct().order_by('-created_at')
-            context['slides'] = None
         else:
+            context['slides'] = SlideShow.objects.all()
             articles = Article.non_archived_objects.all().order_by('-created_at')
         paginator = Paginator(articles, self.article_per_page)
         try:
@@ -168,7 +142,7 @@ class ArticleListView(BaseView):
         return context
 
 
-class ArticleListViewByCategory(BaseView):
+class ArticleListViewByCategory(TemplateView):
     template_name = "m_article/article_list.html"
     article_per_page = 15
 
@@ -189,5 +163,4 @@ class ArticleListViewByCategory(BaseView):
             context['articles'] = paginator.page(paginator.num_pages)
         except PageNotAnInteger:
             context['articles'] = paginator.page(1)
-        context['slides'] = None
         return context

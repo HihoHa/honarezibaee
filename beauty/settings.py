@@ -49,11 +49,12 @@ INSTALLED_APPS = (
     'image_cropping',
     'easy_thumbnails',
     'geoposition',
-    'PIL' ,
+    'PIL',
     'ckeditor',
     'django_wysiwyg',
+    'django_extensions',
     'django.contrib.flatpages',
-     'django_extensions',
+    'myflatpages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -64,7 +65,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
 
 SITE_ID = 1
@@ -116,7 +116,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'my_static')
 TEMPLATE_CONTEXT_PROCESSORS = ('django.core.context_processors.request',
                                'django.contrib.auth.context_processors.auth',
-                               'django.contrib.messages.context_processors.messages',)
+                               'django.contrib.messages.context_processors.messages',
+                               'beauty.context_processors.theme_context',)
 SUMMERNOTE_CONFIG = {'direction': 'rtl', }
 
 THUMBNAIL_PROCESSORS = (
@@ -133,7 +134,6 @@ GEOPOSITION_MARKER_OPTIONS = {
     'position': {'lat': 35.7, 'lng': 51.4},
     'zoom': 13
 }
-
 
 
 mimetypes.add_type("image/svg+xml", ".svg", True)

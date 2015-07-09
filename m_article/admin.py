@@ -153,7 +153,7 @@ class ArticleAdmin(ImageCroppingMixin, admin.ModelAdmin):  # , SummernoteModelAd
               'cropping', 'video',
               'image', 'small_image', 'related_articles', 'publish',
               'archive', 'likes', 'dislikes', 'views', 'citations', 'do_not_publish_until')
-    readonly_fields = ('pk', 'created_at', 'likes', 'dislikes', 'views', 'small_image', 'citations')
+    readonly_fields = ('pk', 'created_at', 'likes', 'dislikes', 'views', 'citations')
     list_filter = ('category', 'publish', 'archive', 'tags')
     list_display = ('title', 'publish', 'archive', 'created_at', 'likes', 'dislikes', 'first_category', 'views')
     ordering = ('-created_at',)
@@ -189,27 +189,6 @@ class SlideShowAdmin(SummernoteModelAdmin):
 class BannerAdmin(admin.ModelAdmin):
     list_display = ('name', 'start_time', 'end_time', 'views', 'clicks')
 
-from django.contrib.flatpages.models import FlatPage
- 
-# Note: we are renaming the original Admin and Form as we import them!
-from django.contrib.flatpages.admin import FlatPageAdmin as FlatPageAdminOld
-from django.contrib.flatpages.admin import FlatpageForm as FlatpageFormOld
-
-
-class FlatpageForm(FlatpageFormOld):
-    content = forms.CharField(widget=CKEditorWidget())
-
-    class Meta:
-        model = FlatPage  # this is not automatically inherited from FlatpageFormOld
- 
- 
-class FlatPageAdmin(FlatPageAdminOld):
-    form = FlatpageForm
- 
- 
-# We have to unregister the normal admin, and then reregister ours
-admin.site.unregister(FlatPage)
-admin.site.register(FlatPage, FlatPageAdmin)
 
 admin.site.register(ArticleTag, TagAdmin)
 admin.site.register(Article, ArticleAdmin)

@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 from m_article.views import banner_redirect
+from myflatpages.views import flatpage
 
 urlpatterns = patterns('',
     # Examples:
@@ -19,6 +20,9 @@ urlpatterns = patterns('',
     url(r'^api/', include('apis.urls')),
     url(r'^ckeditor/', include('ckeditor.urls')),
     url(r'^banner/(?P<banner_pk>\d+)', banner_redirect, name="ad_view"),
+    url(r'^about-us/$', flatpage, {'url': '/about-us/'}, name='about_us'),
+    url(r'^contact-us/$', flatpage, {'url': '/contact-us/'}, name='contact_us'),
+    url(r'^advertisement/$', flatpage, {'url': '/ad/'}, name='advertisement')
 )
 
 

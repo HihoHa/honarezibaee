@@ -140,7 +140,6 @@ class Article(models.Model):
     image = models.ImageField(upload_to='article_avatar/', default='no-picture.jpg')
     cropping = ImageRatioField('image', '500x360')
     small_cropping = ImageRatioField('image', '150x100')
-    small_image = models.ImageField(upload_to='article_avatar/', null=True, blank=True)
     publish = models.BooleanField(default=False)
     archive = models.BooleanField(default=True)
     related_articles = models.ManyToManyField("self", null=True, blank=True)
