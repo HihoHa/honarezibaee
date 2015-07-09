@@ -92,6 +92,7 @@ class ArticleAdminForm(forms.ModelForm):
     # download the images if neccessary
     def clean(self):
         data = super(ArticleAdminForm, self).clean()
+        self.instance._num_of_related_articles = data['related_articles'].count()
         if data.get('download_images'):
             data['content'] = localize(data.get('content', ''))
         publish = data.get('publish')
