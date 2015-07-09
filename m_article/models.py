@@ -230,7 +230,10 @@ def update_handler(sender, instance, action, *args, **kwargs):
 
 @receiver(pre_save, sender=Article, weak=False, dispatch_uid="want_pre_num_of_related")
 def hold_num_of_related(sender, instance, **kargs):
-    instance._num_of_related_articles = len(instance.category.all())
+    if instance.pk:
+        instance._num_of_related_articles = len(instance.category.all())
+    else:
+        instance._num_of_related_articles = 0
 
 @receiver(post_save, sender=Article, weak=False, dispatch_uid="post_save_update")
 def update_related(sender, instance, **kwargs):
