@@ -67,6 +67,7 @@ class ArticleView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(ArticleView, self).get_context_data(**kwargs)
+        
         context['article'] = self.article
         context['related_articles'] = self.article.related_articles.all()
         context['vote_form'] = VoteForm(instance=self.opinion)
@@ -125,7 +126,7 @@ class ArticleListView(TemplateView):
         context = super(ArticleListView, self).get_context_data(**kwargs)
         page = self.request.GET.get('page')
         context['page'] = page
-
+        
         tag = kwargs.get('tag_name')
         if tag:
             articles = Article.m_get_by_tag(tag).distinct().order_by('-created_at')
@@ -153,6 +154,7 @@ class ArticleListViewByCategory(TemplateView):
         category = ArticleCategory.from_url_string(category_name)
         articles = Article.get_by_category(category).order_by('-created_at')
         context['category'] = category
+        
         tag = self.request.GET.get('tag')
         if tag:
             articles = articles.filter(tags__name=tag)

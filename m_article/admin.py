@@ -5,7 +5,6 @@ from treebeard.forms import movenodeform_factory
 from django.core.exceptions import ObjectDoesNotExist
 from m_article.models import Article, ArticleTag, ArticleCategory, SlideShow, ArticleUrlCategory, AdvertisementBanner
 from django_summernote.admin import SummernoteModelAdmin
-from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 from m_article.utils import cleaner, localize, edit_image_attr, with_new_line
 from multiupload.fields import MultiFileField
 from django.conf import settings
@@ -84,7 +83,6 @@ class ArticleAdminForm(forms.ModelForm):
         model = Article
         fields = '__all__'
 
-
     def clean_video(self):
         video = self.cleaned_data['video']
         if video and video.name.split('.')[-1] not in ['mp4', 'flv']:
@@ -122,11 +120,11 @@ class ArticleAdminForm(forms.ModelForm):
             old_a = None
 
         a.save()
-        if not old_a:
-            a.update_small_image()
-        elif not old_a.small_image or old_a.image != a.image:
-            old_a.small_image.delete()
-            a.update_small_image()
+        # if not old_a:
+        #     a.update_small_image()
+        # elif not old_a.small_image or old_a.image != a.image:
+        #     old_a.small_image.delete()
+        #     a.update_small_image()
 
         for image in self.cleaned_data['multifile']:
             path = os.path.join(MEDIA_ROOT, a.title, image.name)
@@ -151,7 +149,7 @@ class ArticleAdmin(ImageCroppingMixin, admin.ModelAdmin):  # , SummernoteModelAd
               'created_at',
               'download_images',
               'cropping', 'video',
-              'image', 'small_image', 'related_articles', 'publish',
+              'image', 'related_articles', 'publish',
               'archive', 'likes', 'dislikes', 'views', 'citations', 'do_not_publish_until')
     readonly_fields = ('pk', 'created_at', 'likes', 'dislikes', 'views', 'citations')
     list_filter = ('category', 'publish', 'archive', 'tags')

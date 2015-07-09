@@ -11,7 +11,7 @@ import os
 from django.core.files.storage import FileSystemStorage
 from django.core.exceptions import ValidationError
 from datetime import datetime, timedelta
-from django.db.models.signals import m2m_changed, post_save
+from django.db.models.signals import m2m_changed, post_save, pre_save
 from django.dispatch import receiver
 from django.core.urlresolvers import reverse
 from django.http import Http404
@@ -181,7 +181,7 @@ class Article(models.Model):
         if category is None:
             return None
         suggestion_root = category.get_suggestion_root()
-        return Article.get_by_category(suggestion_root)
+        return Article.get_by_category(suggestion_root).exclude(pk=self.pk).distinct()
 
     def update_small_image(self):
         """ikhtar!!! doesnt save the model!!!"""
@@ -204,7 +204,7 @@ class Article(models.Model):
         if how_many > 0 and self.get_suggestion_query() is not None:
             for article in self.get_suggestion_query().filter(
                     created_at__gte=self.created_at - timedelta(days=45)).filter(
-                    created_at__lte=self.created_at + timedelta(days=45)).exclude(pk=self.pk).order_by('citations')[:how_many]:
+                    created_at__lte=self.created_at + timedelta(days=45)).exclude(pk=self.pk).distinct().order_by('citations')[:how_many]:
                 self.related_articles.add(article)
         else:
             pass
@@ -224,9 +224,13 @@ def my_handler(sender, instance, action, reverse, pk_set, **kwargs):
 def update_handler(sender, instance, action, *args, **kwargs):
     if action == 'post_clear':
         instance.update_related_articles()
-    if action == 'pre_clear':
-        instance._num_of_related_articles = len(instance.category.all())
+    # if action == 'pre_clear':
+    #     instance._num_of_related_articles = len(instance.category.all())
 
+
+@receiver(pre_save, sender=Article, weak=False, dispatch_uid="want_pre_num_of_related")
+def hold_num_of_related(sender, instance, **kargs):
+    instance._num_of_related_articles = len(instance.category.all())
 
 @receiver(post_save, sender=Article, weak=False, dispatch_uid="post_save_update")
 def update_related(sender, instance, **kwargs):

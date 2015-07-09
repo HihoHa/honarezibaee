@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 
 def theme_context(request):
         context = {}
+        context['view_name'] = "article_view_by_category"
         context['menuitems'] = ArticleCategory.get_root_nodes().order_by('ordering')
         new_articles = Article.non_archived_objects.filter(created_at__gte=(datetime.utcnow() - timedelta(days=15)))
         context['hot'] = new_articles.order_by('-views')[:7]
