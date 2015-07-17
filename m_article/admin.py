@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib import admin
+from django.contrib.admin.sites import site
 from treebeard.admin import TreeAdmin
 from treebeard.forms import movenodeform_factory
 from django.core.exceptions import ObjectDoesNotExist
@@ -14,7 +15,7 @@ from datetime import datetime, timedelta
 from image_cropping import ImageCroppingMixin
 from ckeditor.widgets import CKEditorWidget
 from django.core.urlresolvers import reverse
-from django.contrib.admin.widgets import FilteredSelectMultiple
+from django.contrib.admin.widgets import FilteredSelectMultiple, ForeignKeyRawIdWidget
 import sys
 from utils import small_cropping, avatar_cropping
 
@@ -60,7 +61,6 @@ class ArticleAdminForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ArticleAdminForm, self).__init__(*args, **kwargs)
-        self.felds['main_cateogyr'].required = True
         if self.instance.id:
             queryset = self.instance.get_suggestion_query()
         else:
@@ -77,6 +77,7 @@ class ArticleAdminForm(forms.ModelForm):
     short_description = forms.CharField(required=False, widget=forms.Textarea(attrs={'style': 'direction: rtl; width: 600px;'}))
     category = forms.ModelMultipleChoiceField(queryset=ArticleCategory.objects.all(), widget=FilteredSelectMultiple("Category", False, attrs={'style': 'direction: rtl;'}))
     tags = forms.ModelMultipleChoiceField(required=False, queryset=ArticleTag.objects.all(), widget=FilteredSelectMultiple("Category", False, attrs={'style': 'direction: rtl;'}))
+    main_category = forms.ModelChoiceField(required=True, queryset=ArticleCategory.objects.all())#, widget=ForeignKeyRawIdWidget(Article._meta.get_field('main_category').rel, site))
 
 
     # update_related_articles = forms.BooleanField(required=False)
@@ -150,7 +151,7 @@ class ArticleAdmin(ImageCroppingMixin, admin.ModelAdmin):  # , SummernoteModelAd
     # change_form_tamplate = 'm_article/admin/change_form.html'
 
     fields = ('pk', 'title', 'short_description', 'content', 'clean_style', 'multifile',
-              'tags', 'category',
+              'tags', 'main_category', 'category',
               'created_at',
               'download_images',
               'cropping', 'video',
