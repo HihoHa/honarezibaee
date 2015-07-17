@@ -63,3 +63,11 @@ def with_new_line(content):
         if p.string == '\n':
             p.string = br'&nbsp;'
     return soup.prettify(formatter=None)  # to preserve &nbsp
+
+
+def small_cropping(cropping):
+    pass
+
+
+def avatar_cropping(cropping):
+    pass

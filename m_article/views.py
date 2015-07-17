@@ -73,7 +73,7 @@ class ArticleView(TemplateView):
         context['vote_form'] = VoteForm(instance=self.opinion)
         # context['comments'] = ArticleComment.objects.filter(article = self.article).filter(is_verified=True)
         context['cookie_user'] = self.cookie_user
-        context['recent_related'] = Article.get_by_category(self.article.category.all().first().get_root()).exclude(pk=self.article.pk).order_by('-created_at')[:6]
+        context['recent_related'] = Article.get_by_category(self.article.first_category().get_root()).exclude(pk=self.article.pk).order_by('-created_at')[:6]
         return context
 
     def render_to_response(self, context, **response_kwargs):

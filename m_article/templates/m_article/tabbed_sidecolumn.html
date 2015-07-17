@@ -7,7 +7,7 @@
 			<li>
 				<div class="row">
 						<a href="{% url 'article_view' article_title=item.title category_name=item.first_category.url_prefix %}">
-						<img class="list-img" src="{% cropped_thumbnail item "cropping" %}"  alt="{{ item.title }}" width="100px" height="140px"></a>
+						<img class="list-img" src="{% cropped_thumbnail item "small_test_cropping" %}"  alt="{{ item.title }}" width="100px" height="140px"></a>
 					<a href="{% url 'article_view' article_title=item.title category_name=item.first_category.url_prefix %}"><h4 class="item-heading">
                         {{ item.title }}
 

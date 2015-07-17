@@ -43,7 +43,7 @@
 {% endfor %}
 
  {% endif %}
-    <p>جدیدترین مطالب  {{ article.category.all.first.get_root.name }}:</p>
+    <p>جدیدترین مطالب  {{ article.category.first_category.get_root.name }}:</p>
     {% for article in recent_related %}
         <p><a href="{% url 'article_view' article_title=article.title category_name=article.first_category.url_prefix%}">{{ article.title }}</a></p>
     {% endfor %}

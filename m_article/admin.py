@@ -16,6 +16,7 @@ from ckeditor.widgets import CKEditorWidget
 from django.core.urlresolvers import reverse
 from django.contrib.admin.widgets import FilteredSelectMultiple
 import sys
+from utils import small_cropping, avatar_cropping
 
 MEDIA_ROOT, MEDIA_URL = settings.MEDIA_ROOT, settings.MEDIA_URL
 
@@ -59,6 +60,7 @@ class ArticleAdminForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ArticleAdminForm, self).__init__(*args, **kwargs)
+        self.felds['main_cateogyr'].required = True
         if self.instance.id:
             queryset = self.instance.get_suggestion_query()
         else:
@@ -92,6 +94,8 @@ class ArticleAdminForm(forms.ModelForm):
     # download the images if neccessary
     def clean(self):
         data = super(ArticleAdminForm, self).clean()
+        data['small_cropping'] = small_cropping(data['cropping'])
+        data['avata_cropping'] = avatar_cropping(data['cropping'])
         self.instance._num_of_related_articles = data['related_articles'].count()
         if data.get('download_images'):
             data['content'] = localize(data.get('content', ''))
@@ -114,13 +118,13 @@ class ArticleAdminForm(forms.ModelForm):
         # todo
 
         a = super(ArticleAdminForm, self).save(commit=False)
-
-        try:
-            old_a = Article.objects.get(pk=a.pk)
-        except Article.DoesNotExist:
-            old_a = None
-
-        a.save()
+        #
+        # try:
+        #     old_a = Article.objects.get(pk=a.pk)
+        # except Article.DoesNotExist:
+        #     old_a = None
+        #
+        # a.save()
         # if not old_a:
         #     a.update_small_image()
         # elif not old_a.small_image or old_a.image != a.image:

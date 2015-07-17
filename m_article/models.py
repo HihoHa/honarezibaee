@@ -17,9 +17,6 @@ from django.core.urlresolvers import reverse
 from django.http import Http404
 
 
-SIZE = 205, 205  # size for thumbnails of article
-
-
 class ArticleTag(NS_Node):
     name = models.CharField(max_length=100, unique=True)
     node_order_by = ['name']
@@ -43,14 +40,6 @@ class ArticleCategory(NS_Node):
     ordering = models.FloatField(default=0)
     is_multimedia = models.BooleanField(default=False)
     url_name = models.ForeignKey(ArticleUrlCategory, null=True, blank=True)
-
-    # def clean(self):
-    #     try:
-    #         for sib in self.get_siblings():
-    #             if sib.name == self.name:
-    #                 raise ValidationError('Sibling categories should have different names: ' + self.name)
-    #     except ValidationError as e:
-    #         raise e
 
     def url_prefix(self):
         if self.get_root().url_name:
@@ -136,10 +125,12 @@ class Article(models.Model):
     short_description = models.TextField(null=True, blank=True)
     tags = models.ManyToManyField(ArticleTag, null=True, blank=True)
     category = models.ManyToManyField(ArticleCategory)
+    main_category = models.ForeignKey(ArticleCategory, related_name='main_articles', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to='article_avatar/', default='no-picture.jpg')
     cropping = ImageRatioField('image', '500x360')
-    small_cropping = ImageRatioField('image', '150x100')
+    avatar_test_cropping = ImageRatioField('image', '250x180')
+    small_test_cropping = ImageRatioField('image', '100x72')
     publish = models.BooleanField(default=False)
     archive = models.BooleanField(default=True)
     related_articles = models.ManyToManyField("self", null=True, blank=True)
@@ -162,7 +153,10 @@ class Article(models.Model):
         return list(set(all_tags))
 
     def first_category(self):
-        return self.category.all().first()
+        if not self.main_category:
+            self.main_category = self.category.first()
+            self.save()
+        return self.main_category
 
     @classmethod
     def m_get_by_tag(cls, tag):
@@ -183,18 +177,13 @@ class Article(models.Model):
         suggestion_root = category.get_suggestion_root()
         return Article.get_by_category(suggestion_root).exclude(pk=self.pk).distinct()
 
-    def update_small_image(self):
-        """ikhtar!!! doesnt save the model!!!"""
-        image = Image.open(self.image.path)
-        image.thumbnail(SIZE, Image.ANTIALIAS)
-
-        thumb_io = StringIO.StringIO()
-        image_path = os.path.splitext(self.image.path)
-        image.save(thumb_io, format='JPEG', quality=85)
-
-        image_path = image_path[0] + '_small' + image_path[1]
-
-        self.small_image.save(image_path, File(thumb_io), save=False)
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        super(Article, self).save(force_insert, force_update, using,
+                                  update_fields)
+        self.avatar_test_cropping = self.cropping
+        self.small_test_cropping = self.cropping
+        super(Article, self).save(force_insert, force_update, using, update_fields)
 
     def __unicode__(self):
         return self.title
@@ -208,6 +197,7 @@ class Article(models.Model):
                 self.related_articles.add(article)
         else:
             pass
+
 
 @receiver(m2m_changed, sender=Article.related_articles.through, dispatch_uid="update_citations")
 def my_handler(sender, instance, action, reverse, pk_set, **kwargs):
@@ -224,8 +214,6 @@ def my_handler(sender, instance, action, reverse, pk_set, **kwargs):
 def update_handler(sender, instance, action, *args, **kwargs):
     if action == 'post_clear':
         instance.update_related_articles()
-    # if action == 'pre_clear':
-    #     instance._num_of_related_articles = len(instance.category.all())
 
 #
 # @receiver(pre_save, sender=Article, weak=False, dispatch_uid="want_pre_num_of_related")
@@ -234,6 +222,7 @@ def update_handler(sender, instance, action, *args, **kwargs):
 #         instance._num_of_related_articles = instance.category.all().count()
 #     else:
 #         instance._num_of_related_articles = 0
+
 
 @receiver(post_save, sender=Article, weak=False, dispatch_uid="post_save_update")
 def update_related(sender, instance, **kwargs):
