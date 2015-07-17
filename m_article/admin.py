@@ -78,6 +78,8 @@ class ArticleAdminForm(forms.ModelForm):
     category = forms.ModelMultipleChoiceField(queryset=ArticleCategory.objects.all(), widget=FilteredSelectMultiple("Category", False, attrs={'style': 'direction: rtl;'}))
     tags = forms.ModelMultipleChoiceField(required=False, queryset=ArticleTag.objects.all(), widget=FilteredSelectMultiple("Category", False, attrs={'style': 'direction: rtl;'}))
     main_category = forms.ModelChoiceField(required=True, queryset=ArticleCategory.objects.all())#, widget=ForeignKeyRawIdWidget(Article._meta.get_field('main_category').rel, site))
+    main_category.widget.attrs = {'style': 'direction: rtl;'}
+
 
 
     # update_related_articles = forms.BooleanField(required=False)
