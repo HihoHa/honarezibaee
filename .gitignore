@@ -6,3 +6,5 @@ conf.py
 images/*
 !images/no-picture.png
 .idea/
+beauty/wsgi.py
+psettings.py
