@@ -17,6 +17,7 @@ import logging
 from django.utils import timezone
 from django.http import Http404
 from datetime import datetime, timedelta
+import sys
 
 logger = logging.getLogger('django')
 
@@ -123,6 +124,7 @@ class ArticleListView(TemplateView):
     article_per_page = 15
 
     def get_context_data(self, **kwargs):
+        print >>sys.stderr, 'view entered'
         context = super(ArticleListView, self).get_context_data(**kwargs)
         page = self.request.GET.get('page')
         context['page'] = page

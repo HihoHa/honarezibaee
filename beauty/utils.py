@@ -64,5 +64,5 @@ def show_toolbar(request):
     print >>sys.stderr, 'show toolbar entered'
     if request.is_ajax():
         return False
-    print >>sys.stderr, 'user name is: ' + request.user.username
-    return request.user.username == 'ali'
+    # print >>sys.stderr, 'user name is: ' + request.user.username
+    return request.user and request.user.username == 'ali'
