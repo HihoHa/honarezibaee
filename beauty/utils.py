@@ -61,7 +61,7 @@ logger = logging.getLogger(__name__)
 
 
 def show_toolbar(request):
-    logger.info('show toolbar entered')
+    print >>sys.stderr, 'show toolbar entered'
     if request.is_ajax():
         return False
     print >>sys.stderr, 'user name is: ' + request.user.username
