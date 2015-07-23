@@ -54,8 +54,14 @@ def m_view(attribute_names, mobile_names, refiner_classes):
         return cls
     return decorator
 
+import logging
+
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
+
 
 def show_toolbar(request):
+
     if request.is_ajax():
         return False
     print >>sys.stderr, 'user name is: ' + request.user.username
