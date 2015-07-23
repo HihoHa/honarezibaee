@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup, NavigableString
 import re
+import sys
 
 
 class MobileViewRefiner(object):
@@ -39,6 +40,7 @@ class ListFromStringRefiner(object):
         word_list = re.split('\W+', self.string, flags=re.UNICODE)
         return word_list
 
+
 def m_view(attribute_names, mobile_names, refiner_classes):
     def decorator(cls):
         def new_getattr(self, name):
@@ -51,3 +53,10 @@ def m_view(attribute_names, mobile_names, refiner_classes):
         cls.__getattr__ = new_getattr
         return cls
     return decorator
+
+
+def show_toolbar(request):
+    if request.is_ajax():
+        return False
+    print >>sys.stderr, 'user name is: ' + request.user.username
+    return request.user.username == 'ali'

@@ -11,6 +11,7 @@ from easy_thumbnails.conf import Settings as thumbnail_settings
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import mimetypes
+import sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -59,16 +60,18 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    # 'django.middleware.cache.UpdateCacheMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
+
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
 SITE_ID = 1
@@ -166,5 +169,6 @@ THUMBNAIL_DEBUG = False
 
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
-INTERNAL_IPS = ('127.0.0.1',
-                '37.63.186.77',)
+DEBUG_TOOLBAR_CONFIG = {'SHOW_TOOLBAR_CALLBACK': 'beauty.utils.show_toolbar'}
+
+INTERNAL_IPS = ('127.0.0.1',)
