@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup, NavigableString
 import re
 import sys
-
+logger = logging.getLogger('django')
 
 class MobileViewRefiner(object):
     '''
@@ -61,7 +61,7 @@ logger = logging.getLogger(__name__)
 
 
 def show_toolbar(request):
-
+    logger.info('show toolbar entered')
     if request.is_ajax():
         return False
     print >>sys.stderr, 'user name is: ' + request.user.username
