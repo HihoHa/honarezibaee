@@ -55,10 +55,12 @@ INSTALLED_APPS = (
     'django_extensions',
     'django.contrib.flatpages',
     'myflatpages',
+    'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.middleware.cache.UpdateCacheMiddleware',
+    # 'django.middleware.cache.UpdateCacheMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -66,7 +68,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.cache.UpdateCacheMiddleware',
+    # 'django.middleware.cache.UpdateCacheMiddleware',
 )
 
 SITE_ID = 1
@@ -159,3 +161,10 @@ CACHES = {
         'LOCATION': '127.0.0.1:11211',
     }
 }
+
+THUMBNAIL_DEBUG = False
+
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
+
+INTERNAL_IPS = ('127.0.0.1',
+                '37.63.186.77',)
