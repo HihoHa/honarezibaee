@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup, NavigableString
 import re
 import sys
-logger = logging.getLogger('django')
+
 
 class MobileViewRefiner(object):
     '''
@@ -57,7 +57,7 @@ def m_view(attribute_names, mobile_names, refiner_classes):
 import logging
 
 # Get an instance of a logger
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('django')
 
 
 def show_toolbar(request):
