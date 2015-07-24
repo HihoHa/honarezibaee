@@ -196,6 +196,7 @@ CACHES = {
 #     }
 # }
 
+# DEBUG = True
 
 THUMBNAIL_DEBUG = False
 
@@ -203,4 +204,4 @@ DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 DEBUG_TOOLBAR_CONFIG = {'SHOW_TOOLBAR_CALLBACK': 'beauty.utils.show_toolbar'}
 
-INTERNAL_IPS = ('127.0.0.1',)
+# INTERNAL_IPS = ('127.0.0.1',)

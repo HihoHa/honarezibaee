@@ -61,6 +61,7 @@ logger = logging.getLogger('django')
 
 
 def show_toolbar(request):
+    # return True
     print >>sys.stderr, 'show toolbar entered'
     if request.is_ajax():
         return False
