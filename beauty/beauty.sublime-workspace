@@ -255,7 +255,7 @@
 			"file": "/home/ali/Workspace/beauty/beauty/templates/base.html",
 			"settings":
 			{
-				"buffer_size": 8595,
+				"buffer_size": 9528,
 				"line_ending": "Unix"
 			}
 		},
@@ -263,7 +263,7 @@
 			"file": "/home/ali/Workspace/beauty/beauty/m_article/views.py",
 			"settings":
 			{
-				"buffer_size": 7519,
+				"buffer_size": 7744,
 				"line_ending": "Unix"
 			}
 		},
@@ -271,7 +271,7 @@
 			"file": "/home/ali/Workspace/beauty/beauty/m_article/models.py",
 			"settings":
 			{
-				"buffer_size": 7198,
+				"buffer_size": 9826,
 				"line_ending": "Unix"
 			}
 		},
@@ -279,7 +279,7 @@
 			"file": "/home/ali/Workspace/beauty/beauty/m_article/templates/m_article/sidecolumn.html",
 			"settings":
 			{
-				"buffer_size": 567,
+				"buffer_size": 744,
 				"line_ending": "Unix"
 			}
 		},
@@ -287,7 +287,7 @@
 			"file": "settings.py",
 			"settings":
 			{
-				"buffer_size": 3962,
+				"buffer_size": 5537,
 				"line_ending": "Unix"
 			}
 		},
@@ -311,7 +311,7 @@
 			"file": "/home/ali/Workspace/beauty/beauty/m_article/urls.py",
 			"settings":
 			{
-				"buffer_size": 606,
+				"buffer_size": 636,
 				"line_ending": "Unix"
 			}
 		},
@@ -319,7 +319,7 @@
 			"file": "/home/ali/Workspace/beauty/beauty/m_article/admin.py",
 			"settings":
 			{
-				"buffer_size": 6296,
+				"buffer_size": 8535,
 				"line_ending": "Unix"
 			}
 		},
@@ -327,7 +327,7 @@
 			"file": "/home/ali/Workspace/beauty/beauty/m_article/utils.py",
 			"settings":
 			{
-				"buffer_size": 1765,
+				"buffer_size": 2292,
 				"line_ending": "Unix"
 			}
 		},
@@ -335,7 +335,7 @@
 			"file": "/home/ali/Workspace/beauty/beauty/cookie_user/models.py",
 			"settings":
 			{
-				"buffer_size": 915,
+				"buffer_size": 924,
 				"line_ending": "Unix"
 			}
 		},
@@ -343,7 +343,7 @@
 			"file": "utils.py",
 			"settings":
 			{
-				"buffer_size": 1558,
+				"buffer_size": 1922,
 				"line_ending": "Unix"
 			}
 		},
@@ -351,7 +351,7 @@
 			"file": "/home/ali/Workspace/beauty/beauty/templates/flatpages/default.html",
 			"settings":
 			{
-				"buffer_size": 121,
+				"buffer_size": 139,
 				"line_ending": "Unix"
 			}
 		}
@@ -552,7 +552,7 @@
 					"file": "/home/ali/Workspace/beauty/beauty/templates/base.html",
 					"settings":
 					{
-						"buffer_size": 8595,
+						"buffer_size": 9528,
 						"regions":
 						{
 						},
@@ -579,7 +579,7 @@
 					"file": "/home/ali/Workspace/beauty/beauty/m_article/views.py",
 					"settings":
 					{
-						"buffer_size": 7519,
+						"buffer_size": 7744,
 						"regions":
 						{
 						},
@@ -607,7 +607,7 @@
 					"file": "/home/ali/Workspace/beauty/beauty/m_article/models.py",
 					"settings":
 					{
-						"buffer_size": 7198,
+						"buffer_size": 9826,
 						"regions":
 						{
 						},
@@ -635,7 +635,7 @@
 					"file": "/home/ali/Workspace/beauty/beauty/m_article/templates/m_article/sidecolumn.html",
 					"settings":
 					{
-						"buffer_size": 567,
+						"buffer_size": 744,
 						"regions":
 						{
 						},
@@ -662,15 +662,15 @@
 					"file": "settings.py",
 					"settings":
 					{
-						"buffer_size": 3962,
+						"buffer_size": 5537,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1906,
-								1906
+								0,
+								0
 							]
 						],
 						"settings":
@@ -746,7 +746,7 @@
 					"file": "/home/ali/Workspace/beauty/beauty/m_article/urls.py",
 					"settings":
 					{
-						"buffer_size": 606,
+						"buffer_size": 636,
 						"regions":
 						{
 						},
@@ -772,7 +772,7 @@
 					"file": "/home/ali/Workspace/beauty/beauty/m_article/admin.py",
 					"settings":
 					{
-						"buffer_size": 6296,
+						"buffer_size": 8535,
 						"regions":
 						{
 						},
@@ -800,15 +800,15 @@
 					"file": "/home/ali/Workspace/beauty/beauty/m_article/utils.py",
 					"settings":
 					{
-						"buffer_size": 1765,
+						"buffer_size": 2292,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1667,
-								1667
+								0,
+								0
 							]
 						],
 						"settings":
@@ -828,7 +828,7 @@
 					"file": "/home/ali/Workspace/beauty/beauty/cookie_user/models.py",
 					"settings":
 					{
-						"buffer_size": 915,
+						"buffer_size": 924,
 						"regions":
 						{
 						},
@@ -856,7 +856,7 @@
 					"file": "utils.py",
 					"settings":
 					{
-						"buffer_size": 1558,
+						"buffer_size": 1922,
 						"regions":
 						{
 						},
@@ -884,15 +884,15 @@
 					"file": "/home/ali/Workspace/beauty/beauty/templates/flatpages/default.html",
 					"settings":
 					{
-						"buffer_size": 121,
+						"buffer_size": 139,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								119,
-								119
+								0,
+								0
 							]
 						],
 						"settings":

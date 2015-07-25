@@ -60,10 +60,11 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+
 
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -73,6 +74,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
+
 )
 
 SITE_ID = 1
@@ -201,8 +203,11 @@ CACHES = {
 
 THUMBNAIL_DEBUG = False
 
-DEBUG_TOOLBAR_PATCH_SETTINGS = False
+# DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
-DEBUG_TOOLBAR_CONFIG = {'SHOW_TOOLBAR_CALLBACK': 'beauty.utils.show_toolbar'}
+# DEBUG_TOOLBAR_CONFIG = {'SHOW_TOOLBAR_CALLBACK': 'beauty.utils.show_toolbar'}
 
-# INTERNAL_IPS = ('127.0.0.1',)
+#INTERNAL_IPS = ('127.0.0.1',)
+
+#DEBUG_TOOLBAR_PANELS = ('debug_toolbar.panels.profiling.ProfilingPanel',
+                        'debug_toolbar.panels.timer.TimerPanel',)
