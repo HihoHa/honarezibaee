@@ -40,7 +40,7 @@ class ArticleCategory(NS_Node):
     ordering = models.FloatField(default=0)
     is_multimedia = models.BooleanField(default=False)
     url_name = models.ForeignKey(ArticleUrlCategory, null=True, blank=True)
-    english_name = models.CharField(max_length=100)
+    english_name = models.CharField(max_length=100, null=True, blank=True)
 
     def url_prefix(self):
         if self.get_root().url_name:
