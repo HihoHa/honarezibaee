@@ -29,7 +29,7 @@ class TagAdmin(TreeAdmin):
 
 
 class CategoryAdmin(TreeAdmin):
-    fields = '__all__'
+    # fields = '__all__'
     form = movenodeform_factory(ArticleCategory)
     list_filter = ('name',)
 
