@@ -11,9 +11,8 @@ urlpatterns = patterns('',
     # url(r'^$', 'beauty.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
     url(r'^$', include('m_article.urls')),
-    url(r'^article/', include('m_article.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    (r'^summernote/', include('django_summernote.urls')),
+    url(r'^summernote/', include('django_summernote.urls')),
     url(r'^logout/$', views.logout_view, name="logout_view"),
     url(r'^login/$', views.login_view, name="login_view"),
     url(r'^jobs/', include('jobs.urls')),
@@ -22,7 +21,8 @@ urlpatterns = patterns('',
     url(r'^banner/(?P<banner_pk>\d+)', banner_redirect, name="ad_view"),
     url(r'^about-us/$', flatpage, {'url': '/about-us/'}, name='about_us'),
     url(r'^contact-us/$', flatpage, {'url': '/contact-us/'}, name='contact_us'),
-    url(r'^advertisement/$', flatpage, {'url': '/ad/'}, name='advertisement')
+    url(r'^advertisement/$', flatpage, {'url': '/ad/'}, name='advertisement'),
+    url(r'', include('m_article.urls')),
 )
 
 
