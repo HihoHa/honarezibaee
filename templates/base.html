@@ -70,16 +70,16 @@
 		<div class="content container page" >
 				<div class="row">
 					<div class="col-md-2 col-md-push-10 col-sm-3 col-sm-push-9 hidden-xs">
-						<section>
-							<p class="job-intro">توضیح توضیح توضیح توضیح توضیح توضیح توضیح توضیح توضیح توضیح توضیح</p>
-							<form rol="form" method="get" >
-								<div class="form-group">
-								<input id="search_field" type="text" class="form-control" />
-								<input type="submit" id="search_btn" class="search-btn btn" value="جستجو" />
-							</div>
-							</form>
-						</section>
-
+{#						<section>#}
+{#							<p class="job-intro">توضیح توضیح توضیح توضیح توضیح توضیح توضیح توضیح توضیح توضیح توضیح</p>#}
+{#							<form rol="form" method="get" >#}
+{#								<div class="form-group">#}
+{#								<input id="search_field" type="text" class="form-control" />#}
+{#								<input type="submit" id="search_btn" class="search-btn btn" value="جستجو" />#}
+{#							</div>#}
+{#							</form>#}
+{#						</section>#}
+{##}
                         <section>
                             {% for banner in banners %}
                                 <a href="{{ banner.redirect_link }}"><img src="{{ banner.banner.url }}" class="banner img-responsive" alt="{{ banner.name }}"/></a>
