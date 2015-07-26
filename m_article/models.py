@@ -40,6 +40,7 @@ class ArticleCategory(NS_Node):
     ordering = models.FloatField(default=0)
     is_multimedia = models.BooleanField(default=False)
     url_name = models.ForeignKey(ArticleUrlCategory, null=True, blank=True)
+    english_name = models.CharField(max_length=100)
 
     def url_prefix(self):
         if self.get_root().url_name:
@@ -133,7 +134,7 @@ class Article(models.Model):
     small_test_cropping = ImageRatioField('image', '100x72')
     publish = models.BooleanField(default=False)
     archive = models.BooleanField(default=True)
-    related_articles = models.ManyToManyField("self", null=True, blank=True)
+    related_articles = models.ManyToManyField("self", symmetrical=False, null=True, blank=True)
     objects = models.Manager()
     non_archived_objects = ArticleListManager()
     publishable_objects = ArticleDetailManager()
