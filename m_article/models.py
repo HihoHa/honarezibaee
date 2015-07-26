@@ -43,10 +43,14 @@ class ArticleCategory(NS_Node):
     english_name = models.CharField(max_length=100, null=True, blank=True)
 
     def url_prefix(self):
-        if self.get_root().url_name:
-            return self.get_root().url_name.name
+        if self.is_root():
+            return self.english_name
         else:
-            return self.complete_url()
+            return self.get_parent().url_prefix() + '/' + self.english_name
+        # if self.get_root().url_name:
+        #     return self.get_root().url_name.name
+        # else:
+        #     return self.complete_url()
 
     def number_of_children(self):
         return len(self.get_children())
@@ -61,10 +65,11 @@ class ArticleCategory(NS_Node):
             return self.get_ancestors()[1]
 
     def complete_url(self):
-        if self.is_root():
-            return self.name + u'\u202E'
-        else:
-            return self.get_parent().complete_url() + '/' + self.name + u'\u202E'
+        return self.url_prefix()
+        # if self.is_root():
+        #     return self.english_name
+        # else:
+        #     return self.get_parent().complete_url() + '/' + self.english_name
 
     def is_multimedia_type(self):
         if self.is_root():
@@ -83,7 +88,7 @@ class ArticleCategory(NS_Node):
 
     @classmethod
     def from_url_string(cls, url):
-        url = url.replace(u'\u202E', '/').replace(u'\u2069', '/')
+        # url = url.replace(u'\u202E', '/').replace(u'\u2069', '/')
         m_list = filter(None, url.split('/'))
         roots = cls.get_root_nodes()
         category = cls.get_from_list_by_name(roots, m_list[0])
@@ -96,7 +101,7 @@ class ArticleCategory(NS_Node):
     @classmethod
     def get_from_list_by_name(cls, m_list, name):
         for item in m_list:
-            if item.name == name:
+            if item.english_name == name:
                 return item
         return None
 

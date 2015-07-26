@@ -56,7 +56,7 @@ INSTALLED_APPS = (
     'django_extensions',
     'django.contrib.flatpages',
     'myflatpages',
-    'debug_toolbar',
+    # 'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (
