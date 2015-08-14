@@ -15,9 +15,11 @@ from datetime import datetime, timedelta
 from image_cropping import ImageCroppingMixin
 from ckeditor.widgets import CKEditorWidget
 from django.core.urlresolvers import reverse
-from django.contrib.admin.widgets import FilteredSelectMultiple, ForeignKeyRawIdWidget
+from django.contrib.admin.widgets import FilteredSelectMultiple
 import sys
 from utils import small_cropping, avatar_cropping
+import string
+import random
 
 MEDIA_ROOT, MEDIA_URL = settings.MEDIA_ROOT, settings.MEDIA_URL
 
@@ -68,7 +70,7 @@ class ArticleAdminForm(forms.ModelForm):
             queryset = Article.objects.all()
 
         self.fields['related_articles'] = forms.ModelMultipleChoiceField(required=False,
-            queryset=queryset, widget=FilteredSelectMultiple('Related Articles', False, attrs={'style': 'direction: rtl;'}))
+              queryset=queryset, widget=FilteredSelectMultiple('Related Articles', False, attrs={'style': 'direction: rtl;'}))
 
     multifile = MultiFileField(required=False, max_file_size=5*1024*1024)
     download_images = forms.BooleanField(required=False)
@@ -80,8 +82,6 @@ class ArticleAdminForm(forms.ModelForm):
     tags = forms.ModelMultipleChoiceField(required=False, queryset=ArticleTag.objects.all(), widget=FilteredSelectMultiple("Category", False, attrs={'style': 'direction: rtl;'}))
     main_category = forms.ModelChoiceField(required=True, queryset=ArticleCategory.objects.all())#, widget=ForeignKeyRawIdWidget(Article._meta.get_field('main_category').rel, site))
     main_category.widget.attrs = {'style': 'direction: rtl;'}
-
-
 
     # update_related_articles = forms.BooleanField(required=False)
 
@@ -136,14 +136,21 @@ class ArticleAdminForm(forms.ModelForm):
         #     a.update_small_image()
 
         for image in self.cleaned_data['multifile']:
-            path = os.path.join(MEDIA_ROOT, a.title, image.name)
+            folder_name = datetime.now().strftime('%Y-%m-%d')
+            file_name = image.name[:20]
+            path = os.path.join(MEDIA_ROOT, folder_name, file_name)
+            while os.path.isfile(path):
+                file_name = file_name + random.choice(string.asscibjppercase)
+                path = os.path.join(MEDIA_ROOT, folder_name, file_name)
             if not os.path.exists(os.path.dirname(path)):
                 os.makedirs(os.path.dirname(path))  # light todo: check for concurrent access: http://stackoverflow.com/questions/273192/in-python-check-if-a-directory-exists-and-create-it-if-necessary
             with open(path, 'wb+') as destination:
                 for chunk in image.chunks():
                     destination.write(chunk)
-                a.content = a.content + '<p class="text-center"><strong>%s</strong></p>' % a.title +'<a href="/"><img src="%s" class="img-responsive center-block"></a>' % urljoin(MEDIA_URL,
-                a.title + '/' + image.name)
+                a.content = a.content + '<p class="text-center"><strong>'\
+                    '%s</strong></p>' % a.title + '<a href="/">'\
+                    '<img src="%s" class="img-responsive center-block"></a>' \
+                    % urljoin(MEDIA_URL, folder_name + '/' + file_name)
         if commit:
             a.save()
         return a

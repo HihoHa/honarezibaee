@@ -195,7 +195,7 @@ class Article(models.Model):
         return self.title
 
     def update_related_articles(self):
-        how_many = 5 - self._num_of_related_articles
+        how_many = 6 - self._num_of_related_articles
         if how_many > 0 and self.get_suggestion_query() is not None:
             for article in self.get_suggestion_query().filter(
                     created_at__gte=self.created_at - timedelta(days=45)).filter(

@@ -6,8 +6,8 @@ def theme_context(request):
         context['view_name'] = "article_view_by_category"
         context['menuitems'] = ArticleCategory.get_root_nodes().order_by('ordering')
         new_articles = Article.non_archived_objects.filter(created_at__gte=(datetime.utcnow() - timedelta(days=15)))
-        context['hot'] = new_articles.order_by('-views')[:7]
-        context['best'] = new_articles.order_by('-likes')[:7]
+        context['hot'] = new_articles.order_by('-views')[:10]
+        context['best'] = new_articles.order_by('-likes')[:10]
         multimedia_categories = ArticleCategory.objects.filter(is_multimedia=True)
         context['new_multimedia_non_video'] = Article.publishable_objects.filter(
             category__in=list(multimedia_categories)).filter(video=None).order_by('-views')[:7]
