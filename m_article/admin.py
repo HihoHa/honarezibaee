@@ -20,6 +20,7 @@ import sys
 from utils import small_cropping, avatar_cropping
 import string
 import random
+from .models import LinkExchange
 
 MEDIA_ROOT, MEDIA_URL = settings.MEDIA_ROOT, settings.MEDIA_URL
 
@@ -210,3 +211,4 @@ admin.site.register(ArticleCategory, CategoryAdmin)
 admin.site.register(SlideShow, SlideShowAdmin)
 admin.site.register(ArticleUrlCategory)
 admin.site.register(AdvertisementBanner, BannerAdmin)
+admin.site.register(LinkExchange)

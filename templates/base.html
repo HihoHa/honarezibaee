@@ -189,6 +189,10 @@
 					<li><a href="#">تماس با ما</a></li>
 					<li><span class="circle">&#9898</span></li>
 					<li><a href="#">درباره ما</a></li>
+                                        {% for link in link_exchanges %}
+ 					 <li><span class="circle">&#9898</span></li>
+                                         <li><a href="{{link.url}}">{{link.name}}</a></li>
+                                        {% endfor %}
 				</ul>
 				<span class="clearfix"></span>
 				<p>استفاده از مطالب سایت در صورت ذکر منبع بلامانع است</p>

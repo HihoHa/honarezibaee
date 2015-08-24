@@ -1,4 +1,5 @@
-from m_article.models import Article, ArticleCategory, SlideShow, AdvertisementBanner
+from m_article.models import Article, ArticleCategory, SlideShow, \
+    AdvertisementBanner, LinkExchange
 from datetime import datetime, timedelta
 
 def theme_context(request):
@@ -15,6 +16,7 @@ def theme_context(request):
             category__in=list(multimedia_categories)).exclude(video=None).order_by('-views')[:7]
         context['multimedia_categories'] = multimedia_categories
         context['banners'] = AdvertisementBanner.publishable.all().order_by('?')
+        context['link_exchanges'] = LinkExchange.objects.all()
         for banner in context['banners']:
             banner.views += 1
             banner.save()

@@ -17,6 +17,14 @@ from django.core.urlresolvers import reverse
 from django.http import Http404
 
 
+class LinkExchange(models.Model):
+    url = models.URLField()
+    name = models.CharField(max_length=100)
+
+    def __unicode(self):
+        return self.name
+
+
 class ArticleTag(NS_Node):
     name = models.CharField(max_length=100, unique=True)
     node_order_by = ['name']
