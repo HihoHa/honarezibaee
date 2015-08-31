@@ -1,5 +1,9 @@
+from django import template
 
-def menu_maker(items):
-    result = ''
-    for item in items:
-        result += '<li>'
+
+register = template.Library()
+
+
+@register.filter
+def comma_seperated(value_list):
+    return ', '.join([str(x) for x in value_list])
