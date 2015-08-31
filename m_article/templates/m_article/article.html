@@ -10,8 +10,8 @@
 <link rel="stylesheet" href="{% static "css/mediaelementplayer.css" %}" />
     {% endblock %}
 {% block meta %}
-<meta name="keywords" content="{{ article.tags| comma_seperated }}"/>
-<meta name="description" content="{{ article.tags| comma_seperated }}"/>
+<meta name="keywords" content="{{ article.tags.all| comma_seperated }}"/>
+<meta name="description" content="{{ article.tags.all| comma_seperated }}"/>
 {% endblock %}
 {% block content %}
 
