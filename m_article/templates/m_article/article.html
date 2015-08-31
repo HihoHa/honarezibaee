@@ -1,13 +1,18 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% load article_extras %}
-{{% block script %}
+{% load my_extra_tags %}
+{% block script %}
 <script src="{% static "js/mediaelement-and-player.min.js" %}"></script>
 
  {% endblock %}
     {% block css %}
 <link rel="stylesheet" href="{% static "css/mediaelementplayer.css" %}" />
     {% endblock %}
+{% block meta %}
+<meta name="keywords" content="{{ article.tags| comma_seperated }}"/>
+<meta name="description" content="{{ article.tags| comma_seperated }}"/>
+{% endblock %}
 {% block content %}
 
 
