@@ -1,7 +1,6 @@
 _pycache__/
 *.py[cod]
 *.log
-migrations/
 conf.py
 images/*
 !images/no-picture.png
