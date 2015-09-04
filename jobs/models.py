@@ -36,7 +36,7 @@ class JobCategory(NS_Node):
 
 class JobContent(models.Model):
     title = models.CharField(max_length=1000, null=True, blank=True)
-    description = models.TextFild(null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
     address = models.TextField(null=True, blank=True)
     email_address = models.EmailField(null=True, blank=True)
     location = GeopositionField(null=True, blank=True)
@@ -47,10 +47,10 @@ class JobContent(models.Model):
         refiner_classes=[MobileViewRefiner, MobileViewRefiner,
                          ListFromStringRefiner])
 class Job(models.Model):
-    author = models.ForiegnKey(User)
+    author = models.ForeignKey(User)
     tags = models.ManyToManyField(JobTag, null=True, blank=True)
     category = models.ManyToManyField(JobCategory, blank=True, null=True)
-    content = models.ForiegnKey(JobContent, null=True)
+    content = models.ForeignKey(JobContent, null=True)
 
     @property
     def ID(self):
@@ -120,8 +120,10 @@ class Job(models.Model):
 
 
 class JobChange(models.Model):
-    job = models.ForiegnKey(Job, unique=True, null=True)
-    status = models.CharField(max_length=4, choices=('w', 'r'), deafult='w')
+    job = models.ForeignKey(Job, unique=True, null=True)
+    status = models.CharField(max_length=4,
+                              choices=(('w', 'Waiting'),
+                                       ('r', 'Rejected')), default='w')
     modified = models.DateTimeField(auto_now=True)
-    content = models.ForiegnKey(JobContent, null=True)
+    content = models.ForeignKey(JobContent, null=True)
     message = models.CharField(max_length=1000, null=True)
