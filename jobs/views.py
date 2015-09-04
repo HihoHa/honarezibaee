@@ -2,13 +2,13 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, redirect, render
 from django.core.urlresolvers import reverse
 from django.views.generic import DetailView, TemplateView, ListView
-from .models import Job, JobCategory
-from .forms import JobSearchForm
+from .forms import JobSearchForm, JobContentForm
 from django.db.models import Q
-from .models import Job, JobCategory
+from .models import Job, JobCategory, JobChange, JobContent
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from m_article.models import Article
 from django.forms import ModelForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -114,3 +114,43 @@ class JobSearch(BaseView):
             return context
         else:
             return None
+
+
+@login_required(login_url='/login')
+def ad_edit(request, *args, **kwargs):
+    job = Job.objects.get(pk=kwargs['pk'])
+    if not request.user.is_superuser or not request.user == job.author:
+        return HttpResponse(status=403,
+                            content='you don\'t have permission'
+                            'to acess this page')
+    context = {}
+    context['job'] = job
+    job_change, created = JobChange.objects.get_or_create(job=job)
+    context['job_change'] = job_change
+    if job_change.content:
+        content = job_change.content
+    else:
+        content = JobContent.objects.create()
+        job_change.content = content
+        job_change.save()
+    context['job_change'] = job_change
+
+    if request.method == 'GET':
+        context['job_content_form'] = JobContentForm(instance=content)
+        return render(request, 'jobs/ad_edit.html', context)
+
+    if request.method == 'POST':
+        if request.user.is_superuser:
+            pass
+        else:  # user is ad user (any user that is not super user)
+            pass
+
+
+@login_required(login_url='/login')
+def ad_preview(request, *args, **kwargs):
+    pass
+
+
+@login_required(login_url='/login')
+def ad_list(request, *args, **kwargs):
+    pass
